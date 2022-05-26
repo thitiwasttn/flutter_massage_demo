@@ -8,67 +8,132 @@ class HomePageV2 extends StatefulWidget {
 }
 
 class _HomePageV2State extends State<HomePageV2> {
+  temp() {
+    return Container(
+      color: Colors.blue,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                color: Colors.green,
+                width: MediaQuery.of(context).size.width * 1,
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  child: const Center(
+                    child: Text("menu"),
+                  ),
+                ),
+              )
+            ],
+          ),
+          SizedBox(height: 30),
+          Row(
+            children: [
+              Container(
+                color: Colors.pink,
+                width: MediaQuery.of(context).size.width * 1,
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  child: Center(
+                    child: Container(
+                      height: 300,
+                      child: Text("image slider"),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 30),
+          Row(
+            children: [
+              Container(
+                color: Colors.pink,
+                width: MediaQuery.of(context).size.width * 1,
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  child: Center(
+                    child: Container(
+                      height: 300,
+                      child: Text("Job list"),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Colors.blue,
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Container(
-                  color: Colors.green,
-                  width: MediaQuery.of(context).size.width * 1,
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    child: const Center(
-                      child: Text("menu"),
-                    ),
-                  ),
-                )
-              ],
+        body: ListView(
+      padding: const EdgeInsets.all(8),
+      children: <Widget>[
+        Container(
+          color: Colors.green,
+          width: MediaQuery.of(context).size.width * 1,
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            child: const Center(
+              child: Text("menu"),
             ),
-            SizedBox(height: 30),
-            Row(
-              children: [
-                Container(
-                  color: Colors.pink,
-                  width: MediaQuery.of(context).size.width * 1,
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    child:  Center(
-                      child: Container(
-                        height: 300,
-                        child: Text("image slider"),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-
-            SizedBox(height: 30),
-            Row(
-              children: [
-                Container(
-                  color: Colors.pink,
-                  width: MediaQuery.of(context).size.width * 1,
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    child:  Center(
-                      child: Container(
-                        height: 300,
-                        child: Text("Job list"),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
+          ),
         ),
-      ),
-    );
+        SizedBox(
+          height: 30,
+        ),
+        Container(
+          color: Colors.pink,
+          width: MediaQuery.of(context).size.width * 1,
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            child: Center(
+              child: Container(
+                height: 300,
+                child: Text("image slider"),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 30,
+        ),
+        Container(
+          color: Colors.green,
+          width: MediaQuery.of(context).size.width * 1,
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            child: Center(
+              child: Container(
+                height: 300,
+                child: Text("Job list"),
+              ),
+            ),
+          ),
+        ),
+
+        SizedBox(
+          height: 30,
+        ),
+        Container(
+          color: Colors.pink,
+          width: MediaQuery.of(context).size.width * 1,
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            child: Center(
+              child: Container(
+                height: 300,
+                child: Text("Up skill"),
+              ),
+            ),
+          ),
+        ),
+      ],
+    ));
   }
 }
