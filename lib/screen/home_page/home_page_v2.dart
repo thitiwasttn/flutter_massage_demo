@@ -29,9 +29,41 @@ class _HomePageV2State extends State<HomePageV2> {
                 )
               ],
             ),
+            SizedBox(height: 30),
             Row(
               children: [
-                Text("111"),
+                Container(
+                  color: Colors.pink,
+                  width: MediaQuery.of(context).size.width * 1,
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    child:  Center(
+                      child: Container(
+                        height: 300,
+                        child: Text("image slider"),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            SizedBox(height: 30),
+            Row(
+              children: [
+                Container(
+                  color: Colors.pink,
+                  width: MediaQuery.of(context).size.width * 1,
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    child:  Center(
+                      child: Container(
+                        height: 300,
+                        child: Text("Job list"),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ],
