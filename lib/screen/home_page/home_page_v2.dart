@@ -20,7 +20,7 @@ class _HomePageV2State extends State<HomePageV2> {
 
   temp() {
     return Container(
-      color: Colors.blue,
+      // color: Colors.blue,
       // width: MediaQuery.of(context).size.width,
       // padding: EdgeInsets.all(5),
       // margin: const EdgeInsets.only(left: 20.0, right: 20.0),
@@ -30,7 +30,7 @@ class _HomePageV2State extends State<HomePageV2> {
             children: [
               Container(
                 color: Colors.green,
-                width: MediaQuery.of(context).size.width ,
+                width: MediaQuery.of(context).size.width,
                 child: Container(
                   // width: MediaQuery.of(context).size.width,
                   padding: const EdgeInsets.all(10),
@@ -45,13 +45,25 @@ class _HomePageV2State extends State<HomePageV2> {
           Row(
             children: [
               Container(
-                color: fromHex('#1F5F3C'),
+                // color: fromHex('#1F5F3C'),
+                /*decoration: BoxDecoration(
+                  // color: Colors.yellow,
+                  border: Border.all(color: Colors.black, width: 3),
+                  borderRadius: BorderRadius.all(Radius.circular(18)),
+                ),*/
                 width: MediaQuery.of(context).size.width * 1,
                 child: Container(
                   // width: MediaQuery.of(context).size.width * 0.6,
                   padding: const EdgeInsets.all(10),
                   child: Center(
                     child: Container(
+                      // color: fromHex('#1F5F3C'),
+                      // padding: EdgeInsets.all(50),
+                      decoration: BoxDecoration(
+                        color: fromHex('#1F5F3C'),
+                        // border: Border.all(color: Colors.black, width: 3),
+                        borderRadius: BorderRadius.all(Radius.circular(18)),
+                      ),
                       height: 600,
                       child: CarouselV2(),
                     ),

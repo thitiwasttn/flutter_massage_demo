@@ -17,47 +17,6 @@ class CarouselV2 extends StatefulWidget {
   State<CarouselV2> createState() => _CarouselV2State();
 }
 
-final List<Widget> imageSliders = imgList
-    .map((item) => Container(
-          child: Container(
-            margin: EdgeInsets.all(5.0),
-            child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                child: Stack(
-                  children: <Widget>[
-                    Image.network(item, fit: BoxFit.cover, width: 1000.0),
-                    Positioned(
-                      bottom: 0.0,
-                      left: 0.0,
-                      right: 0.0,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              Color.fromARGB(200, 0, 0, 0),
-                              Color.fromARGB(0, 0, 0, 0)
-                            ],
-                            begin: Alignment.bottomCenter,
-                            end: Alignment.topCenter,
-                          ),
-                        ),
-                        padding: EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 20.0),
-                        child: Text(
-                          'No. ${imgList.indexOf(item)} image',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                )),
-          ),
-        ))
-    .toList();
 
 class _CarouselV2State extends State<CarouselV2> {
   final CarouselController _controller = CarouselController();
@@ -65,10 +24,50 @@ class _CarouselV2State extends State<CarouselV2> {
 
   @override
   Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
     return Column(children: [
       Expanded(
         child: CarouselSlider(
-          items: imageSliders,
+          items: imgList
+              .map((item) => Container(
+                    child: Container(
+                      margin: EdgeInsets.all(5.0),
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                          child: Stack(
+                            children: <Widget>[
+                              Image.network(
+                                item,
+                                fit: BoxFit.cover,
+                                // width: 1000.0,
+                                height: height,
+                              ),
+                              Positioned(
+                                bottom: 0.0,
+                                left: 0.0,
+                                right: 0.0,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Color.fromARGB(200, 0, 0, 0),
+                                        Color.fromARGB(0, 0, 0, 0)
+                                      ],
+                                      begin: Alignment.bottomCenter,
+                                      end: Alignment.topCenter,
+                                    ),
+                                  ),
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: 10.0,
+                                    horizontal: 20.0,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )),
+                    ),
+                  ))
+              .toList(),
           carouselController: _controller,
           options: CarouselOptions(
               autoPlay: true,
@@ -89,7 +88,10 @@ class _CarouselV2State extends State<CarouselV2> {
             child: Container(
               width: 12.0,
               height: 12.0,
-              margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+              margin: EdgeInsets.symmetric(
+                vertical: 8.0,
+                horizontal: 4.0,
+              ),
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: (Theme.of(context).brightness == Brightness.dark
