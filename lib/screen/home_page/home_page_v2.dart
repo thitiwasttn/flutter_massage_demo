@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_massage/screen/home_page/job_list.dart';
 
 import 'carousel.dart';
 import 'carousel_v2.dart';
@@ -76,21 +77,19 @@ class _HomePageV2State extends State<HomePageV2> {
           Row(
             children: [
               Container(
-                color: Colors.green,
+                color: Colors.green.shade300,
                 width: MediaQuery.of(context).size.width * 1,
                 child: Container(
                   padding: const EdgeInsets.all(10),
-                  child: Center(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: fromHex('#1F5F3C'),
-                        // border: Border.all(color: Colors.black, width: 3),
-                        borderRadius: BorderRadius.all(Radius.circular(18)),
-                      ),
-                      height: 300,
-                      width: MediaQuery.of(context).size.width * 1,
-                      child: Text("Job list"),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: fromHex('#F8F8F8').withOpacity(0.7),
+                      // border: Border.all(color: Colors.black, width: 3),
+                      borderRadius: BorderRadius.all(Radius.circular(18)),
                     ),
+                    // height: 450,
+                    width: MediaQuery.of(context).size.width * 1,
+                    child: JobList(),
                   ),
                 ),
               ),
