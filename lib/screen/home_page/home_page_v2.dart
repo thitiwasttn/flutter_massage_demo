@@ -99,15 +99,19 @@ class _HomePageV2State extends State<HomePageV2> {
           Row(
             children: [
               Container(
-                color: Colors.pink,
+                // color: fromHex("F8F8F8"),
                 width: MediaQuery.of(context).size.width * 1,
                 child: Container(
                   padding: const EdgeInsets.all(10),
-                  child: Center(
-                    child: Container(
-                      height: 300,
-                      child: Text("Skills"),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: fromHex('#F8F8F8').withOpacity(0.7),
+                      // border: Border.all(color: Colors.black, width: 3),
+                      borderRadius: BorderRadius.all(Radius.circular(18)),
                     ),
+                    // height: 450,
+                    width: MediaQuery.of(context).size.width * 1,
+                    child: JobList(),
                   ),
                 ),
               ),
