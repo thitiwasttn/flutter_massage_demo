@@ -50,6 +50,7 @@ class _JobListState extends State<JobList> {
     jobs.add(job);
   }
 
+  final ScrollController controller = ScrollController();
   @override
   Widget build(BuildContext context) {
     print(jobs);
@@ -70,7 +71,7 @@ class _JobListState extends State<JobList> {
             height: 20,
           ),
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 20.0),
+            margin: EdgeInsets.symmetric(vertical: 20.0),
             height: 350,
             child: ListView(
               // This next line does the trick.
@@ -89,7 +90,7 @@ class _JobListState extends State<JobList> {
                           width: 300.0,
                           height: MediaQuery.of(context).size.height,
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            // crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               ClipRRect(
                                 borderRadius: BorderRadius.only(
@@ -100,39 +101,68 @@ class _JobListState extends State<JobList> {
                                   e.imageUrl,
                                 ),
                               ),
-                              Container(
-                                padding: EdgeInsets.all(10),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      e.name,
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      e.subName,
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.grey,
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 7,
+                                    child: Container(
+                                      padding: EdgeInsets.only(top: 10, right: 20, left: 20),
+                                      // color: Colors.red,
+                                      // width: 250,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            e.name,
+                                            style: TextStyle(
+                                                fontSize: 25,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Text(
+                                            e.subName,
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Text(
+                                            e.price + " THB/mount",
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      e.price + " THB/mount",
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.grey,
+                                  ),
+                                  Expanded(
+                                    flex: 3,
+                                    child: Container(
+                                      // color: Colors.green,
+                                      // width: 300,
+                                      padding: EdgeInsets.only(top: 10, right: 20, left: 20),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Image.asset(
+                                            'images/saved.png',
+                                            fit: BoxFit.fitHeight,
+                                            height: 30,
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               )
                             ],
                           ),
