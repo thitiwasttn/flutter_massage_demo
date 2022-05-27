@@ -61,11 +61,11 @@ class _HomePageV2State extends State<HomePageV2> {
                       // color: fromHex('#1F5F3C'),
                       // padding: EdgeInsets.all(50),
                       decoration: BoxDecoration(
-                        color: fromHex('#1F5F3C'),
+                        // color: fromHex('#1F5F3C'),
                         // border: Border.all(color: Colors.black, width: 3),
                         borderRadius: BorderRadius.all(Radius.circular(18)),
                       ),
-                      height: 500,
+                      // height: 300,
                       child: CarouselV2(),
                     ),
                   ),
