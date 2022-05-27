@@ -21,7 +21,7 @@ class _HomePageV2State extends State<HomePageV2> {
 
   temp() {
     return Container(
-      // color: Colors.blue,
+      color: Colors.grey.shade200,
       // width: MediaQuery.of(context).size.width,
       // padding: EdgeInsets.all(5),
       // margin: const EdgeInsets.only(left: 20.0, right: 20.0),
@@ -77,7 +77,7 @@ class _HomePageV2State extends State<HomePageV2> {
           Row(
             children: [
               Container(
-                color: Colors.green.shade300,
+                // color: fromHex("F8F8F8"),
                 width: MediaQuery.of(context).size.width * 1,
                 child: Container(
                   padding: const EdgeInsets.all(10),
