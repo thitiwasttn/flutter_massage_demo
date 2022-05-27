@@ -64,7 +64,7 @@ class _HomePageV2State extends State<HomePageV2> {
                         // border: Border.all(color: Colors.black, width: 3),
                         borderRadius: BorderRadius.all(Radius.circular(18)),
                       ),
-                      height: 600,
+                      height: 500,
                       child: CarouselV2(),
                     ),
                   ),
@@ -82,7 +82,13 @@ class _HomePageV2State extends State<HomePageV2> {
                   padding: const EdgeInsets.all(10),
                   child: Center(
                     child: Container(
+                      decoration: BoxDecoration(
+                        color: fromHex('#1F5F3C'),
+                        // border: Border.all(color: Colors.black, width: 3),
+                        borderRadius: BorderRadius.all(Radius.circular(18)),
+                      ),
                       height: 300,
+                      width: MediaQuery.of(context).size.width * 1,
                       child: Text("Job list"),
                     ),
                   ),

@@ -39,29 +39,8 @@ class _CarouselV2State extends State<CarouselV2> {
                               Image.network(
                                 item,
                                 fit: BoxFit.cover,
-                                // width: 1000.0,
+                                width: 1000.0,
                                 height: height,
-                              ),
-                              Positioned(
-                                bottom: 0.0,
-                                left: 0.0,
-                                right: 0.0,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        Color.fromARGB(200, 0, 0, 0),
-                                        Color.fromARGB(0, 0, 0, 0)
-                                      ],
-                                      begin: Alignment.bottomCenter,
-                                      end: Alignment.topCenter,
-                                    ),
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: 10.0,
-                                    horizontal: 20.0,
-                                  ),
-                                ),
                               ),
                             ],
                           )),
@@ -96,7 +75,7 @@ class _CarouselV2State extends State<CarouselV2> {
                   shape: BoxShape.circle,
                   color: (Theme.of(context).brightness == Brightness.dark
                           ? Colors.white
-                          : Colors.black)
+                          : Color.fromARGB(221, 182, 63, 1))
                       .withOpacity(_current == entry.key ? 0.9 : 0.4)),
             ),
           );
