@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_massage/screen/home_page/job_list.dart';
+import 'package:flutter_massage/screen/home_page/upskill_list.dart';
 
 import 'carousel.dart';
 import 'carousel_v2.dart';
@@ -111,7 +112,7 @@ class _HomePageV2State extends State<HomePageV2> {
                     ),
                     // height: 450,
                     width: MediaQuery.of(context).size.width * 1,
-                    child: JobList(),
+                    child: UpskillList(),
                   ),
                 ),
               ),
