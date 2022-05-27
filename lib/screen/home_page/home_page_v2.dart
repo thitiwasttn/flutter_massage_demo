@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_massage/screen/home_page/job_list.dart';
 import 'package:flutter_massage/screen/home_page/upskill_list.dart';
+import 'package:flutter_massage/screen/menu_bar.dart';
 
 import 'carousel.dart';
 import 'carousel_v2.dart';
@@ -204,40 +205,12 @@ class _HomePageV2State extends State<HomePageV2> {
     });
   }
 
-  getNavbar() {
-    return BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-          backgroundColor: Colors.red,
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.business),
-          label: 'Business',
-          backgroundColor: Colors.green,
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.school),
-          label: 'School',
-          backgroundColor: Colors.purple,
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.settings),
-          label: 'Settings',
-          backgroundColor: Colors.pink,
-        ),
-      ],
-      currentIndex: _selectedIndex,
-      selectedItemColor: Colors.amber[800],
-      onTap: _onItemTapped,
-    );
-  }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: getNavbar(),
+        bottomNavigationBar: MenuBar(),
         body: ListView(
       // padding: const EdgeInsets.only(left: 40, right: 40),
       children: <Widget>[
