@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_massage/screen/home_page/home_page.dart';
 import 'package:flutter_massage/screen/home_page/home_page_v2.dart';
+import 'package:flutter_massage/screen/menu_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       scrollBehavior: MyCustomScrollBehavior(),
-      home: HomePageV2(),
+      home: Scaffold(
+        body: HomePageV2(),
+        // bottomNavigationBar: MenuBar(),
+      )
     );
   }
 }

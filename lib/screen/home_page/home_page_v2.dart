@@ -28,21 +28,6 @@ class _HomePageV2State extends State<HomePageV2> {
       // margin: const EdgeInsets.only(left: 20.0, right: 20.0),
       child: Column(
         children: [
-          Row(
-            children: [
-              Container(
-                color: Colors.green,
-                width: MediaQuery.of(context).size.width,
-                child: Container(
-                  // width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.all(10),
-                  child: const Center(
-                    child: Text("menu"),
-                  ),
-                ),
-              )
-            ],
-          ),
           SizedBox(height: 30),
           Row(
             children: [
@@ -125,6 +110,7 @@ class _HomePageV2State extends State<HomePageV2> {
 
   temp2() {
     return Scaffold(
+
         body: ListView(
       // padding: const EdgeInsets.only(left: 40, right: 40),
       children: <Widget>[
@@ -190,9 +176,68 @@ class _HomePageV2State extends State<HomePageV2> {
     ));
   }
 
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text(
+      'Index 0: Home',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 1: Business',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 2: School',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 3: Settings',
+      style: optionStyle,
+    ),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  getNavbar() {
+    return BottomNavigationBar(
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Home',
+          backgroundColor: Colors.red,
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.business),
+          label: 'Business',
+          backgroundColor: Colors.green,
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.school),
+          label: 'School',
+          backgroundColor: Colors.purple,
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.settings),
+          label: 'Settings',
+          backgroundColor: Colors.pink,
+        ),
+      ],
+      currentIndex: _selectedIndex,
+      selectedItemColor: Colors.amber[800],
+      onTap: _onItemTapped,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        bottomNavigationBar: getNavbar(),
         body: ListView(
       // padding: const EdgeInsets.only(left: 40, right: 40),
       children: <Widget>[
