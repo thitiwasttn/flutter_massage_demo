@@ -5,8 +5,8 @@ import '../../navigator_route.dart';
 import '../home_page/home_page_v2.dart';
 
 class JobDetail extends StatefulWidget {
-  const JobDetail({Key? key, String? jobId}) : super(key: key);
-
+  final String? jobId;
+  const JobDetail({Key? key, this.jobId}) : super(key: key);
   static Route<dynamic> route(bool animated) {
     return SimpleRoute(name: '/jobdetail', title: 'job detail', builder: (_) => JobDetail(), animated: animated);
   }
@@ -22,15 +22,17 @@ class JobDetail extends StatefulWidget {
 class _JobDetailState extends State<JobDetail> {
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Container(
         child: ListView(
           children: [
             NavigatorCustom(),
-            Text(Uri.base.toString())
+            Text('${widget.jobId}')
           ],
         ),
       ),
     );
   }
+
 }
