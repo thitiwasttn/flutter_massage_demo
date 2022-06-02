@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_massage/widget/navigator.dart';
 
+import '../../navigator_route.dart';
+import '../home_page/home_page_v2.dart';
+
 class JobDetail extends StatefulWidget {
-  const JobDetail({Key? key}) : super(key: key);
+  const JobDetail({Key? key, String? jobId}) : super(key: key);
+
+  static Route<dynamic> route(bool animated) {
+    return SimpleRoute(name: '/jobdetail', title: 'job detail', builder: (_) => JobDetail(), animated: animated);
+  }
+
+  static Route<dynamic> routeCode(String? jobId) {
+    return SimpleRoute(name: '/jobdetail/$jobId', title: 'User', builder: (_) => JobDetail(jobId: jobId), animated: false);
+  }
 
   @override
   State<JobDetail> createState() => _JobDetailState();
@@ -16,6 +27,7 @@ class _JobDetailState extends State<JobDetail> {
         child: ListView(
           children: [
             NavigatorCustom(),
+            Text(Uri.base.toString())
           ],
         ),
       ),

@@ -7,6 +7,8 @@ import 'package:flutter_massage/screen/home_page/home_page.dart';
 import 'package:flutter_massage/screen/home_page/home_page_v2.dart';
 import 'package:flutter_massage/screen/menu_bar.dart';
 
+import 'navigator_route.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -18,23 +20,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/',
+      onGenerateRoute: (settings) => NavigatorRoute.route(settings.name),
       routes: routers,
       scrollBehavior: MyCustomScrollBehavior(),
       home: Scaffold(
         body: Home(),
         // bottomNavigationBar: MenuBar(),
-      )
+      ),
     );
   }
 }
-
 
 class MyCustomScrollBehavior extends MaterialScrollBehavior {
   // Override behavior methods and getters like dragDevices
   @override
   Set<PointerDeviceKind> get dragDevices => {
-    PointerDeviceKind.touch,
-    PointerDeviceKind.mouse,
-  };
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }

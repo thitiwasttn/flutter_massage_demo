@@ -3,11 +3,16 @@ import 'package:flutter_massage/screen/home_page/job_list.dart';
 import 'package:flutter_massage/screen/home_page/upskill_list.dart';
 import 'package:flutter_massage/screen/menu_bar.dart';
 
+import '../../navigator_route.dart';
 import 'carousel.dart';
 import 'carousel_v2.dart';
 
 class HomePageV2 extends StatefulWidget {
   const HomePageV2({Key? key}) : super(key: key);
+
+  static Route<dynamic> route(bool animated) {
+    return SimpleRoute(name: '/', title: 'Home', builder: (_) => HomePageV2(), animated: animated);
+  }
 
   @override
   State<HomePageV2> createState() => _HomePageV2State();

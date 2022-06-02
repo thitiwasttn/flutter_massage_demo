@@ -29,7 +29,7 @@ class _JobListState extends State<JobList> {
             children: [
               InkWell(
                 onTap: () {
-                  Navigator.pushNamedAndRemoveUntil(context, '/jobdetail', (route) => false);
+                  Navigator.pushNamed(context, '/jobdetail/${e.id}');
                 },
                 child: Container(
                   decoration: BoxDecoration(
