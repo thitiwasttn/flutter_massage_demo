@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_massage/routers.dart';
+import 'package:flutter_massage/screen/home/home.dart';
 import 'package:flutter_massage/screen/home_page/home_page.dart';
 import 'package:flutter_massage/screen/home_page/home_page_v2.dart';
 import 'package:flutter_massage/screen/menu_bar.dart';
@@ -16,9 +18,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      initialRoute: '/',
+      routes: routers,
       scrollBehavior: MyCustomScrollBehavior(),
       home: Scaffold(
-        body: HomePageV2(),
+        body: Home(),
         // bottomNavigationBar: MenuBar(),
       )
     );
