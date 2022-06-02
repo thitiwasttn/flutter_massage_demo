@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_massage/model/job.dart';
+import 'package:flutter_massage/service/job_service.dart';
 import 'package:flutter_massage/widget/navigator.dart';
 
 import '../../navigator_route.dart';
@@ -20,6 +22,8 @@ class JobDetail extends StatefulWidget {
 }
 
 class _JobDetailState extends State<JobDetail> {
+  late Job job;
+
   @override
   Widget build(BuildContext context) {
 
@@ -28,11 +32,17 @@ class _JobDetailState extends State<JobDetail> {
         child: ListView(
           children: [
             NavigatorCustom(),
-            Text('${widget.jobId}')
+            Text(job.name)
           ],
         ),
       ),
     );
   }
 
+  @override
+  void initState() {
+    JobService jobService = JobService();
+    job = jobService.getById(int.parse(widget.jobId!));
+
+  }
 }
