@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_massage/screen/home_page/job_list.dart';
 import 'package:flutter_massage/screen/home_page/upskill_list.dart';
 import 'package:flutter_massage/screen/menu_bar.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../utils/content_view.dart';
+import '../../utils/tab_controller_handler.dart';
 import '../../widget/custom_tab.dart';
+import '../../widget/custom_tab_bar.dart';
 import 'carousel.dart';
 import 'carousel_v2.dart';
 
@@ -18,7 +21,7 @@ class HomePageV2 extends StatefulWidget {
 class _HomePageV2State extends State<HomePageV2>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
-  ItemScrollController itemScrollController;
+  late ItemScrollController itemScrollController;
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
   late double screenHeight;
@@ -34,7 +37,7 @@ class _HomePageV2State extends State<HomePageV2>
     return Color(int.parse(buffer.toString(), radix: 16));
   }
 
-  temp() {
+  Widget temp() {
     return Container(
       color: Colors.grey.shade200,
       // width: MediaQuery.of(context).size.width,
@@ -227,7 +230,7 @@ class _HomePageV2State extends State<HomePageV2>
   List<ContentView> contentViews = [
     ContentView(
       tab: CustomTab(title: 'Home'),
-      content: Text("Home"),
+      content: temp(),
     ),
     ContentView(
       tab: CustomTab(title: 'About'),
@@ -239,13 +242,47 @@ class _HomePageV2State extends State<HomePageV2>
     )
   ];
 
+  Widget desktopView() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        /// Tab Bar
+        Container(
+          height: screenHeight * 0.05,
+          child: CustomTabBar(
+              controller: tabController,
+              tabs: contentViews.map((e) => e.tab).toList()),
+        ),
+
+        /// Tab Bar View
+        Container(
+          height: screenHeight * 0.8,
+          child: TabControllerHandler(
+            tabController: tabController,
+            child: TabBarView(
+              controller: tabController,
+              children: contentViews.map((e) => e.content).toList(),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    screenWidth = MediaQuery.of(context).size.width;
+    screenHeight = MediaQuery.of(context).size.height;
+    topPadding = screenHeight * 0.05;
+    bottomPadding = screenHeight * 0.03;
+    sidePadding = screenWidth * 0.05;
     return Scaffold(
         // bottomNavigationBar: MenuBar(),
         body: ListView(
       // padding: const EdgeInsets.only(left: 40, right: 40),
       children: <Widget>[
+        desktopView(),
         temp(),
       ],
     ));
