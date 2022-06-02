@@ -17,10 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       scrollBehavior: MyCustomScrollBehavior(),
-      home: Scaffold(
-        body: HomePageV2(),
-        // bottomNavigationBar: MenuBar(),
-      )
+      home: HomePageV2()
     );
   }
 }

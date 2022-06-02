@@ -3,6 +3,8 @@ import 'package:flutter_massage/screen/home_page/job_list.dart';
 import 'package:flutter_massage/screen/home_page/upskill_list.dart';
 import 'package:flutter_massage/screen/menu_bar.dart';
 
+import '../../utils/content_view.dart';
+import '../../widget/custom_tab.dart';
 import 'carousel.dart';
 import 'carousel_v2.dart';
 
@@ -13,7 +15,18 @@ class HomePageV2 extends StatefulWidget {
   State<HomePageV2> createState() => _HomePageV2State();
 }
 
-class _HomePageV2State extends State<HomePageV2> {
+class _HomePageV2State extends State<HomePageV2>
+    with SingleTickerProviderStateMixin {
+  late TabController tabController;
+  ItemScrollController itemScrollController;
+  var scaffoldKey = GlobalKey<ScaffoldState>();
+
+  late double screenHeight;
+  late double screenWidth;
+  late double topPadding;
+  late double bottomPadding;
+  late double sidePadding;
+
   Color fromHex(String hexString) {
     final buffer = StringBuffer();
     if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');
@@ -111,7 +124,6 @@ class _HomePageV2State extends State<HomePageV2> {
 
   temp2() {
     return Scaffold(
-
         body: ListView(
       // padding: const EdgeInsets.only(left: 40, right: 40),
       children: <Widget>[
@@ -179,7 +191,7 @@ class _HomePageV2State extends State<HomePageV2> {
 
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
       'Index 0: Home',
@@ -205,12 +217,32 @@ class _HomePageV2State extends State<HomePageV2> {
     });
   }
 
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(length: contentViews.length, vsync: this);
+    itemScrollController = ItemScrollController();
+  }
 
+  List<ContentView> contentViews = [
+    ContentView(
+      tab: CustomTab(title: 'Home'),
+      content: Text("Home"),
+    ),
+    ContentView(
+      tab: CustomTab(title: 'About'),
+      content: Text("About"),
+    ),
+    ContentView(
+      tab: CustomTab(title: 'Projects'),
+      content: Text("Projects"),
+    )
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: MenuBar(),
+        // bottomNavigationBar: MenuBar(),
         body: ListView(
       // padding: const EdgeInsets.only(left: 40, right: 40),
       children: <Widget>[
