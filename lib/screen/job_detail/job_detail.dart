@@ -33,6 +33,7 @@ class JobDetail extends StatefulWidget {
 
 class _JobDetailState extends State<JobDetail> {
   late Job job;
+  late int pageState = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +146,7 @@ class _JobDetailState extends State<JobDetail> {
                   height: 10,
                 ),
                 Container(
-                  color: Colors.grey,
+                  // color: Colors.grey,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -200,8 +201,70 @@ class _JobDetailState extends State<JobDetail> {
                       ),
                     ],
                   ),
-                )
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 50, right: 50),
+                  // color: Colors.grey,
+                  child: Row(
+                    children: [
+                      TextButton(
+                        /*style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.blue),
+                        ),*/
+                        onPressed: () {
+                          setState(() {
+                            pageState = 1;
+                          });
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(15),
+                          decoration: getBoxDesc(),
+                          child: Text(
+                            'Descripion',
+                            style: getTextStyle(),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      TextButton(
+                        /*style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.blue),
+                        ),*/
+                        onPressed: () {
+                          setState(() {
+                            pageState = 2;
+                          });
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(15),
+                          decoration: getBoxCompany(),
+                          child: Text(
+                            'Company',
+                            style: getTextStyleCompany(),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              // color: Colors.white,
+              child: getMessage(),
+            ),
+            SizedBox(
+              height: 300,
             )
           ],
         ),
@@ -213,5 +276,110 @@ class _JobDetailState extends State<JobDetail> {
   void initState() {
     JobService jobService = JobService();
     job = jobService.getById(int.parse(widget.jobId!));
+  }
+
+  Widget getMessage() {
+    if (pageState == 1) {
+      return Container(
+        padding: EdgeInsets.only(left: 50, right: 50),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "About This Job",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              job.detail,
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 20,
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              "Job Responsibilities",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              job.jobResponsibilities,
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 20,
+              ),
+            ),
+          ],
+        ),
+      );
+    } else {
+      return Container();
+    }
+  }
+
+  BoxDecoration getBoxDesc() {
+    if (pageState == 1) {
+      return BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: Color(0xffddb63f),
+        boxShadow: [],
+      );
+    } else {
+      return BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        // color: Colors.white,
+        boxShadow: [],
+      );
+    }
+  }
+
+  BoxDecoration getBoxCompany() {
+    if (pageState == 2) {
+      return BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: Color(0xffddb63f),
+        boxShadow: [],
+      );
+    } else {
+      return BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        // color: Colors.white,
+        boxShadow: [],
+      );
+    }
+  }
+
+  TextStyle getTextStyle() {
+    if (pageState == 1) {
+      return const TextStyle(
+          fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);
+    } else {
+      return const TextStyle(
+          fontSize: 20, fontWeight: FontWeight.bold, color: Colors.grey);
+    }
+  }
+
+  TextStyle getTextStyleCompany() {
+    if (pageState == 2) {
+      return const TextStyle(
+          fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);
+    } else {
+      return const TextStyle(
+          fontSize: 20, fontWeight: FontWeight.bold, color: Colors.grey);
+    }
   }
 }

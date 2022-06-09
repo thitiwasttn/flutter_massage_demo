@@ -14,7 +14,7 @@ class JobService {
         "https://thebest-edu.com/wp-content/uploads/2020/11/Switzerland-Scenery.jpeg";
     job.subName = "สวิตเซอร์แลด์";
     job.price = "49000";
-    job.jobResponsibilities = "-Nam dapibus lacinia felis, in ultrices felis consectetur \n Nullam quis odio eget met consectetur. Nullam ultrices.";
+    job.jobResponsibilities = "- Nam dapibus lacinia felis, in ultrices felis consectetur \n- Nullam quis odio eget met consectetur. Nullam ultrices.";
 
     jobs.add(job);
 
@@ -28,7 +28,7 @@ class JobService {
     job.price = "32000";
     job.detail =
         "Viverra mauris  aliquet. Integer elementum augue non suscipit interdum. Praesent mattis felis sit amet lacus varius dapibus in vel  eu in risus";
-    job.jobResponsibilities = "-Nam dapibus lacinia felis, in ultrices felis consectetur \n Nullam quis odio eget met consectetur. Nullam ultrices.";
+    job.jobResponsibilities = "- Nam dapibus lacinia felis, in ultrices felis consectetur \n- Nullam quis odio eget met consectetur. Nullam ultrices.";
 
     jobs.add(job);
 
@@ -42,7 +42,7 @@ class JobService {
     job.price = "32000";
     job.detail =
         "Viverra mauris  aliquet. Integer elementum augue non suscipit interdum. Praesent mattis felis sit amet lacus varius dapibus in vel  eu in risus";
-    job.jobResponsibilities = "-Nam dapibus lacinia felis, in ultrices felis consectetur \n Nullam quis odio eget met consectetur. Nullam ultrices.";
+    job.jobResponsibilities = "- Nam dapibus lacinia felis, in ultrices felis consectetur \n- Nullam quis odio eget met consectetur. Nullam ultrices.";
 
     jobs.add(job);
 
@@ -56,7 +56,7 @@ class JobService {
     job.price = "32000";
     job.detail =
         "Viverra mauris  aliquet. Integer elementum augue non suscipit interdum. Praesent mattis felis sit amet lacus varius dapibus in vel  eu in risus";
-    job.jobResponsibilities = "-Nam dapibus lacinia felis, in ultrices felis consectetur \n Nullam quis odio eget met consectetur. Nullam ultrices.";
+    job.jobResponsibilities = "- Nam dapibus lacinia felis, in ultrices felis consectetur \n- Nullam quis odio eget met consectetur. Nullam ultrices.";
 
     jobs.add(job);
   }
