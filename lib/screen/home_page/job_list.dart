@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_massage/model/job.dart';
 import 'package:flutter_massage/service/job_service.dart';
+import 'package:routemaster/routemaster.dart';
 
 class JobList extends StatefulWidget {
   const JobList({Key? key}) : super(key: key);
@@ -30,7 +31,7 @@ class _JobListState extends State<JobList> {
               InkWell(
                 onTap: () {
                   //Navigator.pushNamed(context, '/jobdetail/${e.id}');
-                  Navigator.of(context).pushNamed('/jobdetail/${e.id}');
+                  Routemaster.of(context).push('/jobdetail/${e.id}');
                 },
                 child: Container(
                   decoration: BoxDecoration(

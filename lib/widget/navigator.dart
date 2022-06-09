@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:routemaster/routemaster.dart';
 
 class NavigatorCustom extends StatefulWidget {
   const NavigatorCustom({Key? key}) : super(key: key);
@@ -20,7 +21,7 @@ class _NavigatorCustomState extends State<NavigatorCustom> {
             width: 100,
             child: TextButton(
               onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+                Routemaster.of(context).push('/');
               },
               child: Column(
                 children: [
