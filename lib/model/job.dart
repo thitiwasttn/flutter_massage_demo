@@ -4,6 +4,9 @@ class Job {
   late String _imageUrl;
   late String _subName;
   late String _price;
+  late String _time;
+  late String _detail;
+  late String _jobResponsibilities;
 
 
   Job();
@@ -36,5 +39,23 @@ class Job {
 
   set id(int value) {
     _id = value;
+  }
+
+  String get time => _time;
+
+  set time(String value) {
+    _time = value;
+  }
+
+  String get detail => _detail;
+
+  set detail(String value) {
+    _detail = value;
+  }
+
+  String get jobResponsibilities => _jobResponsibilities;
+
+  set jobResponsibilities(String value) {
+    _jobResponsibilities = value;
   }
 }
