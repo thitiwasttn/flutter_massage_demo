@@ -16,7 +16,7 @@ void main() {
 
 final routes = RouteMap(
   routes: {
-    '/': (_) => MaterialPage(child: Scaffold(body: ListView(children: [HomePageV2()],),)),
+    '/': (_) => MaterialPage(child: Home()),
     '/jobdetail/:jobId': (route) => MaterialPage(child: JobDetail(jobId: route.pathParameters['jobId'],)),
   },
 );
