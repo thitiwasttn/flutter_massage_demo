@@ -9,7 +9,12 @@ class JobService {
     job.name = "waa spa";
     job.time = "Full Time";
     job.detail =
-        "Viverra mauris  aliquet. Integer elementum augue non suscipit interdum. Praesent mattis felis sit amet lacus varius dapibus in vel  eu in risus";
+        "Viverra mauris  aliquet. Integer elementum augue non suscipit interdum. Praesent mattis felis sit amet lacus varius dapibus in vel  eu in risus"
+            "Viverra mauris  aliquet. Integer elementum augue non suscipit interdum. Praesent mattis felis sit amet lacus varius dapibus in vel  eu in risus"
+            "Viverra mauris  aliquet. Integer elementum augue non suscipit interdum. Praesent mattis felis sit amet lacus varius dapibus in vel  eu in risus"
+            "Viverra mauris  aliquet. Integer elementum augue non suscipit interdum. Praesent mattis felis sit amet lacus varius dapibus in vel  eu in risus"
+            "Viverra mauris  aliquet. Integer elementum augue non suscipit interdum. Praesent mattis felis sit amet lacus varius dapibus in vel  eu in risus"
+            "Viverra mauris  aliquet. Integer elementum augue non suscipit interdum. Praesent mattis felis sit amet lacus varius dapibus in vel  eu in risus";
     job.imageUrl =
         "https://thebest-edu.com/wp-content/uploads/2020/11/Switzerland-Scenery.jpeg";
     job.subName = "สวิตเซอร์แลด์";

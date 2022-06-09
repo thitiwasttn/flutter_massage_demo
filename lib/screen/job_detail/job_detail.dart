@@ -212,7 +212,8 @@ class _JobDetailState extends State<JobDetail> {
                     children: [
                       TextButton(
                         style: ButtonStyle(
-                          overlayColor: MaterialStateProperty.all(Colors.transparent),
+                          overlayColor:
+                              MaterialStateProperty.all(Colors.transparent),
                         ),
                         /*style: ButtonStyle(
                           foregroundColor:
@@ -237,7 +238,8 @@ class _JobDetailState extends State<JobDetail> {
                       ),
                       TextButton(
                         style: ButtonStyle(
-                          overlayColor: MaterialStateProperty.all(Colors.transparent),
+                          overlayColor:
+                              MaterialStateProperty.all(Colors.transparent),
                         ),
                         /*style: ButtonStyle(
                           foregroundColor:
@@ -270,7 +272,40 @@ class _JobDetailState extends State<JobDetail> {
               child: getMessage(),
             ),
             SizedBox(
-              height: 300,
+              height: 50,
+            ),
+            Container(
+              child: TextButton(
+                style: ButtonStyle(
+                  overlayColor: MaterialStateProperty.all(Colors.transparent),
+                ),
+                /*style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.blue),
+                        ),*/
+                onPressed: () {},
+                child: Container(
+                  alignment: Alignment.center,
+                  width: 400,
+                  padding: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Color(0xff1F5F3C),
+                    boxShadow: [],
+                  ),
+                  child: Text(
+                    'Apply Now',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 50,
             )
           ],
         ),
