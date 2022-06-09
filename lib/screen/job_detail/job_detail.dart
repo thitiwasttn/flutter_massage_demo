@@ -211,6 +211,9 @@ class _JobDetailState extends State<JobDetail> {
                   child: Row(
                     children: [
                       TextButton(
+                        style: ButtonStyle(
+                          overlayColor: MaterialStateProperty.all(Colors.transparent),
+                        ),
                         /*style: ButtonStyle(
                           foregroundColor:
                               MaterialStateProperty.all<Color>(Colors.blue),
@@ -233,6 +236,9 @@ class _JobDetailState extends State<JobDetail> {
                         width: 20,
                       ),
                       TextButton(
+                        style: ButtonStyle(
+                          overlayColor: MaterialStateProperty.all(Colors.transparent),
+                        ),
                         /*style: ButtonStyle(
                           foregroundColor:
                               MaterialStateProperty.all<Color>(Colors.blue),
