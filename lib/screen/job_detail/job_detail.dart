@@ -74,8 +74,8 @@ class _JobDetailState extends State<JobDetail> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                          width: 400.0,
-                          height: 400.0,
+                          width: 300.0,
+                          height: 300.0,
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               image: new DecorationImage(

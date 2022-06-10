@@ -15,11 +15,14 @@ class _NavigatorCustomState extends State<NavigatorCustom> {
       height: 100,
       color: Colors.white,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Container(
-            width: 100,
+            width: 70,
             child: TextButton(
+              style: ButtonStyle(
+                overlayColor: MaterialStateProperty.all(Colors.transparent),
+              ),
               onPressed: () {
                 Routemaster.of(context).push('/');
               },
@@ -33,8 +36,11 @@ class _NavigatorCustomState extends State<NavigatorCustom> {
             ),
           ),
           Container(
-            width: 100,
+            width: 70,
             child: TextButton(
+              style: ButtonStyle(
+                overlayColor: MaterialStateProperty.all(Colors.transparent),
+              ),
               onPressed: () {
                 Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
               },
@@ -48,8 +54,11 @@ class _NavigatorCustomState extends State<NavigatorCustom> {
             ),
           ),
           Container(
-            width: 100,
+            width: 70,
             child: TextButton(
+              style: ButtonStyle(
+                overlayColor: MaterialStateProperty.all(Colors.transparent),
+              ),
               onPressed: () {
                 Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
               },
@@ -65,8 +74,11 @@ class _NavigatorCustomState extends State<NavigatorCustom> {
           Container(
             width: 100,
             child: TextButton(
+              style: ButtonStyle(
+                overlayColor: MaterialStateProperty.all(Colors.transparent),
+              ),
               onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+                Routemaster.of(context).push('/profile');
               },
               child: Column(
                 children: [
@@ -77,9 +89,6 @@ class _NavigatorCustomState extends State<NavigatorCustom> {
               ),
             ),
           ),
-          SizedBox(
-            width: 30,
-          )
         ],
       ),
     );

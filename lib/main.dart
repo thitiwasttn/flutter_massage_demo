@@ -6,6 +6,9 @@ import 'package:flutter_massage/screen/home/home.dart';
 import 'package:flutter_massage/screen/home_page/home_page.dart';
 import 'package:flutter_massage/screen/home_page/home_page_v2.dart';
 import 'package:flutter_massage/screen/job_detail/job_detail.dart';
+import 'package:flutter_massage/screen/profile/profile_page.dart';
+import 'package:flutter_massage/utils/my_provider.dart';
+import 'package:flutter_massage/utils/shared_object.dart';
 import 'package:routemaster/routemaster.dart';
 
 import 'navigator_route.dart';
@@ -18,6 +21,7 @@ final routes = RouteMap(
   routes: {
     '/': (_) => MaterialPage(child: Home()),
     '/jobdetail/:jobId': (route) => MaterialPage(child: JobDetail(jobId: route.pathParameters['jobId'],)),
+    '/profile': (_) => MaterialPage(child: ProfilePage()),
   },
 );
 
@@ -27,10 +31,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      scrollBehavior: MyCustomScrollBehavior(),
-      routerDelegate: RoutemasterDelegate(routesBuilder: (_) => routes),
-      routeInformationParser: RoutemasterParser(),
+    return MyProvider(
+      sharedObject: SharedObject(),
+      child: MaterialApp.router(
+        scrollBehavior: MyCustomScrollBehavior(),
+        routerDelegate: RoutemasterDelegate(routesBuilder: (_) => routes),
+        routeInformationParser: RoutemasterParser(),
+      ),
     );
   }
 }
