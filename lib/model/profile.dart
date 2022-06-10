@@ -1,7 +1,15 @@
 class Profile {
   late int _id;
+  late String _token;
   late String _name;
   late String _imageUrl;
+
+
+  String get token => _token;
+
+  set token(String value) {
+    _token = value;
+  }
 
   String get name => _name;
 

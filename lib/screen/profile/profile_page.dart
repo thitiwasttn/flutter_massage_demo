@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:routemaster/routemaster.dart';
 
 import '../../utils/my_provider.dart';
 import '../../utils/shared_object.dart';
@@ -415,7 +416,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       style: ButtonStyle(
                         overlayColor: MaterialStateProperty.all(Colors.transparent),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Routemaster.of(context).push('/profile/resume');
+                      },
                       child: Container(
                           padding: EdgeInsets.only(
                             top: 6,

@@ -19,7 +19,7 @@ class _HomeState extends State<Home> {
     sharedObject.profile.id = 1;
     sharedObject.profile.name = "Thitiwas Nupan";
     sharedObject.profile.imageUrl = "https://static.independent.co.uk/s3fs-public/thumbnails/image/2015/06/06/15/Chris-Pratt.jpg?quality=75&width=982&height=726&auto=webp";
-
+    sharedObject.profile.token = "ABC1234513fpaflp";
     print('sharedObject: ${sharedObject.profile.name}');
     return Scaffold(
       body: buildDeskTop(),

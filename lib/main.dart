@@ -1,12 +1,14 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_massage/model/profile_info.dart';
 import 'package:flutter_massage/routers.dart';
 import 'package:flutter_massage/screen/home/home.dart';
 import 'package:flutter_massage/screen/home_page/home_page.dart';
 import 'package:flutter_massage/screen/home_page/home_page_v2.dart';
 import 'package:flutter_massage/screen/job_detail/job_detail.dart';
 import 'package:flutter_massage/screen/profile/profile_page.dart';
+import 'package:flutter_massage/screen/resume/resume_page.dart';
 import 'package:flutter_massage/utils/my_provider.dart';
 import 'package:flutter_massage/utils/shared_object.dart';
 import 'package:routemaster/routemaster.dart';
@@ -22,6 +24,7 @@ final routes = RouteMap(
     '/': (_) => MaterialPage(child: Home()),
     '/jobdetail/:jobId': (route) => MaterialPage(child: JobDetail(jobId: route.pathParameters['jobId'],)),
     '/profile': (_) => MaterialPage(child: ProfilePage()),
+    '/profile/resume': (_) => MaterialPage(child: ResumePage()),
   },
 );
 
