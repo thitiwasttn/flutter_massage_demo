@@ -7,6 +7,7 @@ import 'package:flutter_massage/screen/home/home.dart';
 import 'package:flutter_massage/screen/home_page/home_page.dart';
 import 'package:flutter_massage/screen/home_page/home_page_v2.dart';
 import 'package:flutter_massage/screen/job_detail/job_detail.dart';
+import 'package:flutter_massage/screen/login/login_page.dart';
 import 'package:flutter_massage/screen/profile/profile_page.dart';
 import 'package:flutter_massage/screen/resume/resume_page.dart';
 import 'package:flutter_massage/utils/my_provider.dart';
@@ -25,6 +26,7 @@ final routes = RouteMap(
     '/jobdetail/:jobId': (route) => MaterialPage(child: JobDetail(jobId: route.pathParameters['jobId'],)),
     '/profile': (_) => MaterialPage(child: ProfilePage()),
     '/profile/resume': (_) => MaterialPage(child: ResumePage()),
+    '/login': (_) => MaterialPage(child: LoginPage()),
   },
 );
 

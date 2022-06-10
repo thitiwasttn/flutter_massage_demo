@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
 
+import '../utils/my_provider.dart';
+import '../utils/shared_object.dart';
+
 class NavigatorCustom extends StatefulWidget {
   const NavigatorCustom({Key? key}) : super(key: key);
 
@@ -11,6 +14,7 @@ class NavigatorCustom extends StatefulWidget {
 class _NavigatorCustomState extends State<NavigatorCustom> {
   @override
   Widget build(BuildContext context) {
+    SharedObject sharedObject = MyProvider.of(context);
     return Container(
       height: 100,
       color: Colors.white,
@@ -42,7 +46,8 @@ class _NavigatorCustomState extends State<NavigatorCustom> {
                 overlayColor: MaterialStateProperty.all(Colors.transparent),
               ),
               onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/', (route) => false);
               },
               child: Column(
                 children: [
@@ -60,7 +65,8 @@ class _NavigatorCustomState extends State<NavigatorCustom> {
                 overlayColor: MaterialStateProperty.all(Colors.transparent),
               ),
               onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/', (route) => false);
               },
               child: Column(
                 children: [
@@ -78,7 +84,11 @@ class _NavigatorCustomState extends State<NavigatorCustom> {
                 overlayColor: MaterialStateProperty.all(Colors.transparent),
               ),
               onPressed: () {
-                Routemaster.of(context).push('/profile');
+                if (!sharedObject.isLogin) {
+                  Routemaster.of(context).push('/login');
+                } else {
+                  Routemaster.of(context).push('/profile');
+                }
               },
               child: Column(
                 children: [

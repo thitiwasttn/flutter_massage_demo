@@ -14,9 +14,19 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      SharedObject sharedObject = MyProvider.of(context);
+      if (!sharedObject.isLogin) {
+        print('ABC');
+        Routemaster.of(context).push('/login');
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     SharedObject sharedObject = MyProvider.of(context);
-
     return Scaffold(
       body: Container(
         child: ListView(
@@ -404,53 +414,109 @@ class _ProfilePageState extends State<ProfilePage> {
               height: 20,
             ),
             Container(
-                margin: EdgeInsets.only(
-                  left: 50,
-                  right: 50,
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    TextButton(
-                      style: ButtonStyle(
-                        overlayColor: MaterialStateProperty.all(Colors.transparent),
-                      ),
-                      onPressed: () {
-                        Routemaster.of(context).push('/profile/resume');
-                      },
-                      child: Container(
-                          padding: EdgeInsets.only(
-                            top: 6,
-                            bottom: 6,
-                            right: 10,
-                            left: 10,
+              margin: EdgeInsets.only(
+                left: 50,
+                right: 50,
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  TextButton(
+                    style: ButtonStyle(
+                      overlayColor:
+                          MaterialStateProperty.all(Colors.transparent),
+                    ),
+                    onPressed: () {
+                      Routemaster.of(context).push('/profile/resume');
+                    },
+                    child: Container(
+                        padding: EdgeInsets.only(
+                          top: 6,
+                          bottom: 6,
+                          right: 10,
+                          left: 10,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [],
+                          border: Border.all(
+                            color: Color(0x1ff1F5F3C),
                           ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            boxShadow: [],
-                            border: Border.all(
-                              color: Color(0x1ff1F5F3C),
+                        ),
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              'images/View_alt.png',
+                              width: 30,
+                              height: 30,
                             ),
+                            Text(
+                              'preview resume',
+                              style: TextStyle(
+                                color: Color(0x1ff1F5F3C),
+                              ),
+                            ),
+                          ],
+                        )),
+                  )
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+
+            Container(
+              margin: EdgeInsets.only(
+                left: 50,
+                right: 50,
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  TextButton(
+                    style: ButtonStyle(
+                      overlayColor:
+                      MaterialStateProperty.all(Colors.transparent),
+                    ),
+                    onPressed: () {
+                      Routemaster.of(context).push('/profile/resume');
+                    },
+                    child: Container(
+                        padding: EdgeInsets.only(
+                          top: 6,
+                          bottom: 6,
+                          right: 10,
+                          left: 10,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [],
+                          border: Border.all(
+                            color: Color(0x1ff1F5F3C),
                           ),
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                'images/View_alt.png',
-                                width: 30,
-                                height: 30,
+                        ),
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              'images/View_alt.png',
+                              width: 30,
+                              height: 30,
+                            ),
+                            Text(
+                              'logout'.toUpperCase(),
+                              style: TextStyle(
+                                color: Color(0x1ff1F5F3C),
                               ),
-                              Text(
-                                'preview resume',
-                                style: TextStyle(
-                                  color: Color(0x1ff1F5F3C),
-                                ),
-                              ),
-                            ],
-                          )),
-                    )
-                  ],
-                )),
+                            ),
+                          ],
+                        )),
+                  )
+                ],
+              ),
+            ),
             SizedBox(
               height: 20,
             ),

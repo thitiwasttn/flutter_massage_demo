@@ -15,6 +15,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+
     SharedObject sharedObject = MyProvider.of(context);
     sharedObject.profile.id = 1;
     sharedObject.profile.name = "Thitiwas Nupan";
