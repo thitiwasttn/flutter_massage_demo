@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:routemaster/routemaster.dart';
 
 import '../utils/my_provider.dart';
 import '../utils/shared_object.dart';
 
 class NavigatorCustom extends StatefulWidget {
+
   const NavigatorCustom({Key? key}) : super(key: key);
 
   @override
@@ -12,6 +14,10 @@ class NavigatorCustom extends StatefulWidget {
 }
 
 class _NavigatorCustomState extends State<NavigatorCustom> {
+
+  final LocalStorage storage = LocalStorage('some_key');
+  
+  
   @override
   Widget build(BuildContext context) {
     SharedObject sharedObject = MyProvider.of(context);
@@ -84,7 +90,8 @@ class _NavigatorCustomState extends State<NavigatorCustom> {
                 overlayColor: MaterialStateProperty.all(Colors.transparent),
               ),
               onPressed: () {
-                if (!sharedObject.isLogin) {
+                print('storage.getItem("isLogin") == Null ${storage.getItem("isLogin") == null}');
+                if (storage.getItem("isLogin") == null || !storage.getItem("isLogin")) {
                   Routemaster.of(context).push('/login');
                 } else {
                   Routemaster.of(context).push('/profile');

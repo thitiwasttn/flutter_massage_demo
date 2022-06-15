@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_massage/model/profile.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:routemaster/routemaster.dart';
 
+import '../../model/profile_info.dart';
 import '../../utils/my_provider.dart';
 import '../../utils/shared_object.dart';
 import '../../widget/navigator.dart';
@@ -13,515 +16,549 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final LocalStorage storage = LocalStorage('some_key');
+  late Profile profile;
+  bool initialized = false;
+  late bool isLogin;
+  late ProfileInfo profileInfo;
+
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      SharedObject sharedObject = MyProvider.of(context);
-      if (!sharedObject.isLogin) {
-        print('ABC');
+    loadIntem();
+  }
+
+  loadIntem() async {
+    bool isready = await storage.ready;
+    print("isready ${isready}");
+    if (isready) {
+      print("ok");
+      if (storage.getItem("isLogin") != null && storage.getItem("isLogin")) {
+        isLogin = storage.getItem("isLogin");
+        profile = Profile();
+        setState(() {
+          profile.name = storage.getItem("name");
+          profile.imageUrl = storage.getItem('imageUrl');
+        });
+      } else {
         Routemaster.of(context).push('/login');
       }
-    });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     SharedObject sharedObject = MyProvider.of(context);
+    // loadIntem();
     return Scaffold(
-      body: Container(
-        child: ListView(
-          children: [
-            NavigatorCustom(),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              padding: EdgeInsets.only(left: 50, right: 50),
-              // color: Colors.grey,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Image.asset(
-                    'images/Subtract.png',
-                    fit: BoxFit.fitHeight,
-                    height: 30,
+      body: FutureBuilder(
+        future: storage.ready,
+        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+          if (snapshot.data == null) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          // loadIntem();
+          // print('profile ${profile}');
+          return Container(
+            child: ListView(
+              children: [
+                NavigatorCustom(),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 50, right: 50),
+                  // color: Colors.grey,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Image.asset(
+                        'images/Subtract.png',
+                        fit: BoxFit.fitHeight,
+                        height: 30,
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              padding: EdgeInsets.only(left: 50, right: 50),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 200.0,
-                    height: 200.0,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: new DecorationImage(
-                        fit: BoxFit.fill,
-                        image: NetworkImage(sharedObject.profile.imageUrl),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 50, right: 50),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 200.0,
+                        height: 200.0,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: new DecorationImage(
+                            fit: BoxFit.fill,
+                            image: NetworkImage(profile.imageUrl),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        profile.name,
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                    left: 50,
+                    right: 50,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.white,
+                    boxShadow: [],
+                  ),
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Center(
+                      child: Container(
+                        padding: EdgeInsets.only(
+                          left: 50,
+                          right: 50,
+                          top: 20,
+                          bottom: 20,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: double.infinity,
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "ข้อมูลส่วนตัว",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    sharedObject.profile.name,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Container(
-              margin: EdgeInsets.only(
-                left: 50,
-                right: 50,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.white,
-                boxShadow: [],
-              ),
-              child: TextButton(
-                onPressed: () {},
-                child: Center(
-                  child: Container(
-                    padding: EdgeInsets.only(
-                      left: 50,
-                      right: 50,
-                      top: 20,
-                      bottom: 20,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: double.infinity,
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "ข้อมูลส่วนตัว",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                 ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              margin: EdgeInsets.only(
-                left: 50,
-                right: 50,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.white,
-                boxShadow: [],
-              ),
-              child: TextButton(
-                onPressed: () {},
-                child: Center(
-                  child: Container(
-                    padding: EdgeInsets.only(
-                      left: 50,
-                      right: 50,
-                      top: 20,
-                      bottom: 20,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: double.infinity,
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "การศึกษา",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                SizedBox(
+                  height: 10,
                 ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              margin: EdgeInsets.only(
-                left: 50,
-                right: 50,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.white,
-                boxShadow: [],
-              ),
-              child: TextButton(
-                onPressed: () {},
-                child: Center(
-                  child: Container(
-                    padding: EdgeInsets.only(
-                      left: 50,
-                      right: 50,
-                      top: 20,
-                      bottom: 20,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: double.infinity,
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "ประสบการณ์ทำงาน",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                Container(
+                  margin: EdgeInsets.only(
+                    left: 50,
+                    right: 50,
                   ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              margin: EdgeInsets.only(
-                left: 50,
-                right: 50,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.white,
-                boxShadow: [],
-              ),
-              child: TextButton(
-                onPressed: () {},
-                child: Center(
-                  child: Container(
-                    padding: EdgeInsets.only(
-                      left: 50,
-                      right: 50,
-                      top: 20,
-                      bottom: 20,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: double.infinity,
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "ทักษะ",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.white,
+                    boxShadow: [],
                   ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              margin: EdgeInsets.only(
-                left: 50,
-                right: 50,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.white,
-                boxShadow: [],
-              ),
-              child: TextButton(
-                onPressed: () {},
-                child: Center(
-                  child: Container(
-                    padding: EdgeInsets.only(
-                      left: 50,
-                      right: 50,
-                      top: 20,
-                      bottom: 20,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: double.infinity,
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "ใบรับรอง",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              margin: EdgeInsets.only(
-                left: 50,
-                right: 50,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.white,
-                boxShadow: [],
-              ),
-              child: TextButton(
-                onPressed: () {},
-                child: Center(
-                  child: Container(
-                    padding: EdgeInsets.only(
-                      left: 50,
-                      right: 50,
-                      top: 20,
-                      bottom: 20,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: double.infinity,
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "เงินเดือนที่ต้องการ",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              margin: EdgeInsets.only(
-                left: 50,
-                right: 50,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.white,
-                boxShadow: [],
-              ),
-              child: TextButton(
-                onPressed: () {},
-                child: Center(
-                  child: Container(
-                    padding: EdgeInsets.only(
-                      left: 50,
-                      right: 50,
-                      top: 20,
-                      bottom: 20,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: double.infinity,
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "งานที่สนใจ",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              margin: EdgeInsets.only(
-                left: 50,
-                right: 50,
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  TextButton(
-                    style: ButtonStyle(
-                      overlayColor:
-                          MaterialStateProperty.all(Colors.transparent),
-                    ),
-                    onPressed: () {
-                      Routemaster.of(context).push('/profile/resume');
-                    },
-                    child: Container(
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Center(
+                      child: Container(
                         padding: EdgeInsets.only(
-                          top: 6,
-                          bottom: 6,
-                          right: 10,
-                          left: 10,
+                          left: 50,
+                          right: 50,
+                          top: 20,
+                          bottom: 20,
                         ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: [],
-                          border: Border.all(
-                            color: Color(0x1ff1F5F3C),
-                          ),
-                        ),
-                        child: Row(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Image.asset(
-                              'images/View_alt.png',
-                              width: 30,
-                              height: 30,
-                            ),
-                            Text(
-                              'preview resume',
-                              style: TextStyle(
-                                color: Color(0x1ff1F5F3C),
+                            SizedBox(
+                              width: double.infinity,
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "การศึกษา",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
                             ),
                           ],
-                        )),
-                  )
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-
-            Container(
-              margin: EdgeInsets.only(
-                left: 50,
-                right: 50,
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  TextButton(
-                    style: ButtonStyle(
-                      overlayColor:
-                      MaterialStateProperty.all(Colors.transparent),
+                        ),
+                      ),
                     ),
-                    onPressed: () {
-                      Routemaster.of(context).push('/profile/resume');
-                    },
-                    child: Container(
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                    left: 50,
+                    right: 50,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.white,
+                    boxShadow: [],
+                  ),
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Center(
+                      child: Container(
                         padding: EdgeInsets.only(
-                          top: 6,
-                          bottom: 6,
-                          right: 10,
-                          left: 10,
+                          left: 50,
+                          right: 50,
+                          top: 20,
+                          bottom: 20,
                         ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: [],
-                          border: Border.all(
-                            color: Color(0x1ff1F5F3C),
-                          ),
-                        ),
-                        child: Row(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Image.asset(
-                              'images/View_alt.png',
-                              width: 30,
-                              height: 30,
-                            ),
-                            Text(
-                              'logout'.toUpperCase(),
-                              style: TextStyle(
-                                color: Color(0x1ff1F5F3C),
+                            SizedBox(
+                              width: double.infinity,
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "ประสบการณ์ทำงาน",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
                             ),
                           ],
-                        )),
-                  )
-                ],
-              ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                    left: 50,
+                    right: 50,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.white,
+                    boxShadow: [],
+                  ),
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Center(
+                      child: Container(
+                        padding: EdgeInsets.only(
+                          left: 50,
+                          right: 50,
+                          top: 20,
+                          bottom: 20,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: double.infinity,
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "ทักษะ",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                    left: 50,
+                    right: 50,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.white,
+                    boxShadow: [],
+                  ),
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Center(
+                      child: Container(
+                        padding: EdgeInsets.only(
+                          left: 50,
+                          right: 50,
+                          top: 20,
+                          bottom: 20,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: double.infinity,
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "ใบรับรอง",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                    left: 50,
+                    right: 50,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.white,
+                    boxShadow: [],
+                  ),
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Center(
+                      child: Container(
+                        padding: EdgeInsets.only(
+                          left: 50,
+                          right: 50,
+                          top: 20,
+                          bottom: 20,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: double.infinity,
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "เงินเดือนที่ต้องการ",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                    left: 50,
+                    right: 50,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.white,
+                    boxShadow: [],
+                  ),
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Center(
+                      child: Container(
+                        padding: EdgeInsets.only(
+                          left: 50,
+                          right: 50,
+                          top: 20,
+                          bottom: 20,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: double.infinity,
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "งานที่สนใจ",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                    left: 50,
+                    right: 50,
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      TextButton(
+                        style: ButtonStyle(
+                          overlayColor:
+                              MaterialStateProperty.all(Colors.transparent),
+                        ),
+                        onPressed: () {
+                          Routemaster.of(context).push('/profile/resume');
+                        },
+                        child: Container(
+                            padding: EdgeInsets.only(
+                              top: 6,
+                              bottom: 6,
+                              right: 10,
+                              left: 10,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [],
+                              border: Border.all(
+                                color: Color(0x1ff1F5F3C),
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'images/View_alt.png',
+                                  width: 30,
+                                  height: 30,
+                                ),
+                                Text(
+                                  'preview resume',
+                                  style: TextStyle(
+                                    color: Color(0x1ff1F5F3C),
+                                  ),
+                                ),
+                              ],
+                            )),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                    left: 50,
+                    right: 50,
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      TextButton(
+                        style: ButtonStyle(
+                          overlayColor:
+                              MaterialStateProperty.all(Colors.transparent),
+                        ),
+                        onPressed: () {
+                          setState((){
+                            storage.setItem('isLogin', false);
+                          });
+                          Routemaster.of(context).push('/login');
+                        },
+                        child: Container(
+                            padding: EdgeInsets.only(
+                              top: 6,
+                              bottom: 6,
+                              right: 10,
+                              left: 10,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [],
+                              border: Border.all(
+                                color: Color(0x1ff1F5F3C),
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'images/View_alt.png',
+                                  width: 30,
+                                  height: 30,
+                                ),
+                                Text(
+                                  'logout'.toUpperCase(),
+                                  style: TextStyle(
+                                    color: Color(0x1ff1F5F3C),
+                                  ),
+                                ),
+                              ],
+                            )),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+              ],
             ),
-            SizedBox(
-              height: 20,
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

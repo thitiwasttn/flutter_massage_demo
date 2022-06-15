@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_massage/model/profile.dart';
 import 'package:flutter_massage/model/profile_info.dart';
 import 'package:flutter_massage/service/profile_service.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:routemaster/routemaster.dart';
 
 import '../../utils/my_provider.dart';
@@ -18,20 +20,42 @@ class _ResumePageState extends State<ResumePage> {
   late ProfileInfo profileInfo;
   late SharedObject sharedObject;
   ProfileService profileService = ProfileService();
+  final LocalStorage storage = LocalStorage('some_key');
+  late Profile profile;
 
   @override
   void initState() {
     super.initState();
+    loadIntem();
+
+  }
+
+  loadIntem() async {
+    bool isready = await storage.ready;
+    print("isready ${isready}");
+    if (isready) {
+      print("ok");
+      if (storage.getItem("isLogin") != null && storage.getItem("isLogin")) {
+        setState((){
+          profile = new Profile();
+          profile.imageUrl = storage.getItem("imageUrl");
+          profileInfo =
+              profileService.getProfileInfoByToken(storage.getItem("token"));
+          print('profileInfo ${profileInfo.skill}');
+        });
+      } else {
+        Routemaster.of(context).push('/login');
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     // SharedObject sharedObject = MyProvider.of(context);
-    setState(() {
+    /*setState(() {
       sharedObject = MyProvider.of(context);
-      profileInfo =
-          profileService.getProfileInfoByToken(sharedObject.profile.token);
-    });
+
+    });*/
     return Scaffold(
       body: Container(
         child: ListView(
@@ -61,8 +85,7 @@ class _ResumePageState extends State<ResumePage> {
                               SizedBox(
                                 width: 10,
                               ),
-                              Text(
-                                'Back',
+                              Text('Back',
                                 style: TextStyle(
                                     color: Color(0x1ff1F5F3C),
                                     fontWeight: FontWeight.bold),
@@ -113,7 +136,7 @@ class _ResumePageState extends State<ResumePage> {
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   fit: BoxFit.fill,
-                  image: NetworkImage(sharedObject.profile.imageUrl),
+                  image: NetworkImage(profile.imageUrl),
                 ),
               ),
             ),
