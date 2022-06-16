@@ -32,7 +32,7 @@ class JobDetail extends StatefulWidget {
 }
 
 class _JobDetailState extends State<JobDetail> {
-  late Job job;
+  Job job = Job();
   late int pageState = 1;
 
   @override
@@ -316,7 +316,11 @@ class _JobDetailState extends State<JobDetail> {
   @override
   void initState() {
     JobService jobService = JobService();
-    job = jobService.getById(int.parse(widget.jobId!));
+    jobService.getById(int.parse(widget.jobId!)).then((value) {
+      setState(() {
+        job = value;
+      });
+    });
   }
 
   Widget getMessage() {

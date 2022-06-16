@@ -6,26 +6,11 @@ import 'package:flutter_massage/model/profile_info.dart';
 import 'package:http/http.dart' as http;
 
 class ProfileService {
-  ProfileInfo getProfileInfoByToken(String token) {
-    ProfileInfo profileInfo = ProfileInfo();
-    if (token == '1234') {
-      profileInfo.education =
-          "- Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed\n- Lorem ipsum dolor sit ";
-      profileInfo.experience =
-          "- Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed\n- Lorem ipsum dolor sit ";
-      profileInfo.skill =
-          "- Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed\n- Lorem ipsum dolor sit ";
-      List<String> images = [];
-      images.add(
-          "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/certificate-of-appreciation-design-template-c46b6dc447f94b068a04728bd695cc4c_screen.jpg?ts=1608659484");
-      images.add(
-          "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/certificate-of-appreciation-design-template-c46b6dc447f94b068a04728bd695cc4c_screen.jpg?ts=1608659484");
-      images.add(
-          "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/certificate-of-appreciation-design-template-c46b6dc447f94b068a04728bd695cc4c_screen.jpg?ts=1608659484");
-      profileInfo.certifications.addAll(images);
-      profileInfo.objective =
-          "- Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ";
-    }
+  Future<ProfileInfo> getProfileInfoByToken(int id, String token) async {
+    ProfileInfo profileInfo;
+    profileInfo = await getProfileInfo(id, token).then((value) {
+      return value;
+    });
 
     return profileInfo;
   }
@@ -56,9 +41,10 @@ class ProfileService {
     Profile profile = Profile();
     print('data >> ${user}');
     profile.name = user['name'];
+    profile.id = user['id'];
     profile.token = json['jwt'];
     profile.imageUrl =
-        await getProfile(user['id'], profile.token).then((value) {
+        await getProfileInfo(profile.id, profile.token).then((value) {
       return value.image;
     });
 
@@ -71,7 +57,7 @@ class ProfileService {
     return profile;
   }
 
-  Future<ProfileInfo> getProfile(int userId, String token) async {
+  Future<ProfileInfo> getProfileInfo(int userId, String token) async {
     ProfileInfo profileInfo = ProfileInfo();
     var headers = {'Authorization': 'Bearer $token'};
     var request = http.Request(
@@ -105,7 +91,7 @@ class ProfileService {
       ret.certifications = [];
       List<dynamic> temp = value['attributes']['certification']['data'];
       for (var value1 in temp) {
-        String img = value1['attributes']['url'];
+        String img = '${Constant.backendUrl}${value1['attributes']['url']}';
         ret.certifications.add(img);
       }
     }

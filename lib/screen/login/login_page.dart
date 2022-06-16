@@ -115,17 +115,18 @@ class _LoginPageState extends State<LoginPage> {
     });
     print('name ${p.name}');
     print('token ${p.token}');
-    print('image ${p.imageUrl}');
+    print('id ${p.id}');
     if (p.token != null) {
-      sharedObject.profile.id = 1;
+      sharedObject.profile.id = p.id;
       sharedObject.profile.name = p.name;
       sharedObject.profile.imageUrl = p.imageUrl;
       sharedObject.profile.token = p.token;
       sharedObject.isLogin = true;
       storage.setItem("isLogin", true);
       storage.setItem("token", p.token);
-      storage.setItem("name", sharedObject.profile.name);
-      storage.setItem("imageUrl", sharedObject.profile.imageUrl);
+      storage.setItem("name", p.name);
+      storage.setItem("id", p.id);
+      storage.setItem("imageUrl", p.imageUrl);
       Routemaster.of(context).push('/profile');
     }
   }

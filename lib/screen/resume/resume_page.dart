@@ -17,11 +17,11 @@ class ResumePage extends StatefulWidget {
 }
 
 class _ResumePageState extends State<ResumePage> {
-  late ProfileInfo profileInfo;
+  ProfileInfo profileInfo = ProfileInfo();
   late SharedObject sharedObject;
   ProfileService profileService = ProfileService();
   final LocalStorage storage = LocalStorage('some_key');
-  late Profile profile;
+  Profile profile = Profile();
 
   @override
   void initState() {
@@ -35,11 +35,14 @@ class _ResumePageState extends State<ResumePage> {
     if (isready) {
       print("ok");
       if (storage.getItem("isLogin") != null && storage.getItem("isLogin")) {
+        ProfileInfo temp = await profileService.getProfileInfoByToken(storage.getItem("id"), storage.getItem("token")).then((value) {
+          return value;
+        });
+        print('temp ${temp.image}');
+
         setState(() {
-          profile = new Profile();
           profile.imageUrl = storage.getItem("imageUrl");
-          profileInfo =
-              profileService.getProfileInfoByToken(storage.getItem("token"));
+          profileInfo = temp;
           print('profileInfo ${profileInfo.skill}');
         });
       } else {
@@ -120,6 +123,8 @@ class _ResumePageState extends State<ResumePage> {
               ],
             ),
           );
+
+          // return Container();
         },
       ),
     );

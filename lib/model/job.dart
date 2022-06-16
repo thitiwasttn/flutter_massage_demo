@@ -1,12 +1,12 @@
 class Job {
-  late int _id;
-  late String _name;
-  late String _imageUrl;
-  late String _subName;
-  late String _price;
-  late String _time;
-  late String _detail;
-  late String _jobResponsibilities;
+  int _id = 0;
+  String _name = "";
+  String _imageUrl ="";
+  String _subName = "";
+  String _price = "";
+  String _time = "";
+  String _detail = "";
+  String _jobResponsibilities = "";
 
 
   Job();

@@ -93,30 +93,48 @@ class JobService {
     List<Job> ret = [];
     // print('data.length ${data.length}');
     for (var value in data) {
-      Job job = Job();
-      String name = value['attributes']['name'];
-      String location = value['attributes']['location'];
-      String price = value['attributes']['price'];
-      String time = value['attributes']['time'];
-      String detail = value['attributes']['detail'];
-      String job_responsibilities = value['attributes']['job_responsibilities'];
-      String image = value['attributes']['image']['data']['attributes']['url'];
-
-      job.id = value['id'];
-      job.name = name;
-      job.time = time;
-      job.detail = detail;
-      job.imageUrl = '${Constant.backendUrl}${image}';
-      job.subName = location;
-      job.price = price;
-      job.jobResponsibilities = job_responsibilities;
-
+      Job job = jsonObjToObj(value);
       ret.add(job);
     }
     return ret;
   }
 
-  Job getById(int id) {
+  Future<Job> getById(int id) async {
+    var request = http.Request(
+        'GET', Uri.parse('${Constant.backendUrl}/api/jobs/$id?populate=*'));
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      dynamic json = jsonDecode(await response.stream.bytesToString());
+      Job ret = jsonObjToObj(json['data']);
+      ret.id = id;
+      return ret;
+    } else {
+      print(response.reasonPhrase);
+    }
+
     return jobs.firstWhere((element) => element.id == id);
+  }
+
+  Job jsonObjToObj(dynamic value) {
+    Job job = Job();
+    String name = value['attributes']['name'];
+    String location = value['attributes']['location'];
+    String price = value['attributes']['price'];
+    String time = value['attributes']['time'];
+    String detail = value['attributes']['detail'];
+    String job_responsibilities = value['attributes']['job_responsibilities'];
+    String image = value['attributes']['image']['data']['attributes']['url'];
+
+    job.id = value['id'];
+    job.name = name;
+    job.time = time;
+    job.detail = detail;
+    job.imageUrl = '${Constant.backendUrl}${image}';
+    job.subName = location;
+    job.price = price;
+    job.jobResponsibilities = job_responsibilities;
+    return job;
   }
 }
