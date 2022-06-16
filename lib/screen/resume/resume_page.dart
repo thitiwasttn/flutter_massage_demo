@@ -27,7 +27,6 @@ class _ResumePageState extends State<ResumePage> {
   void initState() {
     super.initState();
     loadIntem();
-
   }
 
   loadIntem() async {
@@ -36,7 +35,7 @@ class _ResumePageState extends State<ResumePage> {
     if (isready) {
       print("ok");
       if (storage.getItem("isLogin") != null && storage.getItem("isLogin")) {
-        setState((){
+        setState(() {
           profile = new Profile();
           profile.imageUrl = storage.getItem("imageUrl");
           profileInfo =
@@ -51,73 +50,77 @@ class _ResumePageState extends State<ResumePage> {
 
   @override
   Widget build(BuildContext context) {
-    // SharedObject sharedObject = MyProvider.of(context);
-    /*setState(() {
-      sharedObject = MyProvider.of(context);
-
-    });*/
     return Scaffold(
-      body: Container(
-        child: ListView(
-          children: [
-            NavigatorCustom(),
-            Container(
-              margin: EdgeInsets.only(left: 50, right: 50),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
+      body: FutureBuilder(
+        future: storage.ready,
+        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+          if (snapshot.data == null) {
+            return Container();
+          }
+
+          return Container(
+            child: ListView(
+              children: [
+                NavigatorCustom(),
+                Container(
+                  margin: EdgeInsets.only(left: 50, right: 50),
+                  child: Column(
                     children: [
-                      Container(
-                        child: TextButton(
-                          style: ButtonStyle(
-                            overlayColor:
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            child: TextButton(
+                              style: ButtonStyle(
+                                overlayColor:
                                 MaterialStateProperty.all(Colors.transparent),
-                          ),
-                          onPressed: () {
-                            Routemaster.of(context).pop();
-                          },
-                          child: Row(
-                            children: [
-                              Image.asset('images/back.png'),
-                              SizedBox(
-                                width: 10,
                               ),
-                              Text('Back',
-                                style: TextStyle(
-                                    color: Color(0x1ff1F5F3C),
-                                    fontWeight: FontWeight.bold),
+                              onPressed: () {
+                                Routemaster.of(context).pop();
+                              },
+                              child: Row(
+                                children: [
+                                  Image.asset('images/back.png'),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text('Back',
+                                    style: TextStyle(
+                                        color: Color(0x1ff1F5F3C),
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(
+                          top: 30,
+                          bottom: 30,
+                          left: 5,
+                          right: 5,
                         ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [],
+                          color: Colors.white,
+                        ),
+                        child: getInfo(context),
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(
-                      top: 30,
-                      bottom: 30,
-                      left: 5,
-                      right: 5,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [],
-                      color: Colors.white,
-                    ),
-                    child: getInfo(context),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
+                )
+              ],
+            ),
+          );
+        },
       ),
     );
   }
