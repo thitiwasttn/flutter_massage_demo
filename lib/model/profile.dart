@@ -1,8 +1,8 @@
 class Profile {
-  late int _id;
-  late String token;
-  late String _name;
-  late String _imageUrl;
+  int _id = 0;
+  String token = "";
+  String _name = "";
+  String _imageUrl = "";
 
   String get name => _name;
 

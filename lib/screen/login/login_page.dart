@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_massage/service/profile_service.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:routemaster/routemaster.dart';
 
+import '../../model/profile.dart';
 import '../../utils/my_provider.dart';
 import '../../utils/shared_object.dart';
 import '../../widget/navigator.dart';
@@ -17,6 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   late String username;
   late String password;
   late SharedObject sharedObject;
+  final ProfileService profileService = ProfileService();
 
   final LocalStorage storage = LocalStorage('some_key');
 
@@ -69,7 +72,8 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       TextButton(
                         style: ButtonStyle(
-                          overlayColor: MaterialStateProperty.all(Colors.transparent),
+                          overlayColor:
+                              MaterialStateProperty.all(Colors.transparent),
                         ),
                         onPressed: () {
                           login(context);
@@ -103,20 +107,25 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void login(BuildContext context) {
+  Future<void> login(BuildContext context) async {
     print('username $username, password $password');
-    if(username == 'thitiwas' && password == '1234') {
+    Profile p = Profile();
+    p = await profileService.login(username, password).then((value) {
+      return value;
+    });
+    print('name ${p.name}');
+    print('token ${p.token}');
+    print('image ${p.imageUrl}');
+    if (p.token != null) {
       sharedObject.profile.id = 1;
-      sharedObject.profile.name = "Thitiwas Nupanz";
-      sharedObject.profile.imageUrl = "https://static.independent.co.uk/s3fs-public/thumbnails/image/2015/06/06/15/Chris-Pratt.jpg?quality=75&width=982&height=726&auto=webp";
-      sharedObject.profile.token = "1234";
+      sharedObject.profile.name = p.name;
+      sharedObject.profile.imageUrl = p.imageUrl;
+      sharedObject.profile.token = p.token;
       sharedObject.isLogin = true;
-      // storage.setItem("profile", sharedObject.profile);
       storage.setItem("isLogin", true);
-      storage.setItem("token", '1234');
+      storage.setItem("token", p.token);
       storage.setItem("name", sharedObject.profile.name);
       storage.setItem("imageUrl", sharedObject.profile.imageUrl);
-
       Routemaster.of(context).push('/profile');
     }
   }

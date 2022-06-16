@@ -1,9 +1,17 @@
 class ProfileInfo {
-  late String _education;
-  late String _experience;
-  late String _skill;
-  late List<String> _certifications = [];
-  late String _objective;
+  String _education = "";
+  String _experience = "";
+  String _skill = "";
+  List<String> _certifications = [];
+  String _objective = "";
+  String _image = "";
+
+
+  String get image => _image;
+
+  set image(String value) {
+    _image = value;
+  }
 
   String get education => _education;
 
