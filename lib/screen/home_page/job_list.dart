@@ -17,7 +17,11 @@ class _JobListState extends State<JobList> {
   @override
   void initState() {
     JobService jobService = JobService();
-    jobs = jobService.getListJob();
+    jobService.getListJob().then((value) {
+      setState(() {
+        jobs = value;
+      });
+    });
   }
 
   final ScrollController controller = ScrollController();
@@ -25,8 +29,7 @@ class _JobListState extends State<JobList> {
   getJobList() {
     return jobs
         .map(
-          (e) =>
-          Row(
+          (e) => Row(
             children: [
               InkWell(
                 onTap: () {
@@ -39,10 +42,7 @@ class _JobListState extends State<JobList> {
                     borderRadius: BorderRadius.all(Radius.circular(18)),
                   ),
                   width: 300.0,
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height,
+                  height: MediaQuery.of(context).size.height,
                   child: Column(
                     children: [
                       ClipRRect(
@@ -59,13 +59,12 @@ class _JobListState extends State<JobList> {
                           Expanded(
                             flex: 7,
                             child: Container(
-                              padding: EdgeInsets.only(
-                                  top: 10, right: 20, left: 20),
+                              padding:
+                                  EdgeInsets.only(top: 10, right: 20, left: 20),
                               // color: Colors.red,
                               // width: 250,
                               child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     e.name,
@@ -102,11 +101,10 @@ class _JobListState extends State<JobList> {
                             child: Container(
                               // color: Colors.green,
                               // width: 300,
-                              padding: EdgeInsets.only(
-                                  top: 10, right: 20, left: 20),
+                              padding:
+                                  EdgeInsets.only(top: 10, right: 20, left: 20),
                               child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Image.asset(
                                     'images/saved.png',
@@ -128,7 +126,7 @@ class _JobListState extends State<JobList> {
               )
             ],
           ),
-    )
+        )
         .toList();
   }
 

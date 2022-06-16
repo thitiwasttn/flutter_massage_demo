@@ -24,7 +24,7 @@ class HomeService {
     print('data.length ${data.length}');
     for (var value in data) {
       String image = value['attributes']['image']['data']['attributes']['url'];
-      print('image >> ${image}');
+      // print('image >> ${image}');
       ret.add('${Constant.backendUrl}${image}');
     }
     // String temp = data['attributes']['image']['data']['attributes']['url'];
