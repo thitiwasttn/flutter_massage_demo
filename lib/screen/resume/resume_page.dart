@@ -79,7 +79,7 @@ class _ResumePageState extends State<ResumePage> {
           return Container(
             child: ListView(
               children: [
-                NavigatorCustom(),
+                isMobile(context) ? Container() : NavigatorCustom(),
                 Container(
                   margin: isMobile(context)
                       ? EdgeInsets.only(left: 10, right: 10)
@@ -137,7 +137,8 @@ class _ResumePageState extends State<ResumePage> {
                       ),
                     ],
                   ),
-                )
+                ),
+                isMobile(context) ? NavigatorCustom() : Container(),
               ],
             ),
           );
@@ -195,28 +196,32 @@ class _ResumePageState extends State<ResumePage> {
   Text textEducation(BuildContext context) {
     return Text(
       profileInfo.education,
-      style: TextStyle(color: Color(0x1ff50555C), fontSize: isMobile(context) ? 15 : 25),
+      style: TextStyle(
+          color: Color(0x1ff50555C), fontSize: isMobile(context) ? 15 : 25),
     );
   }
 
   Text textExperience(BuildContext context) {
     return Text(
       profileInfo.experience,
-      style: TextStyle(color: Color(0x1ff50555C), fontSize: isMobile(context) ? 15 : 25),
+      style: TextStyle(
+          color: Color(0x1ff50555C), fontSize: isMobile(context) ? 15 : 25),
     );
   }
 
   Text textSkill() {
     return Text(
       profileInfo.skill,
-      style: TextStyle(color: Color(0x1ff50555C), fontSize: isMobile(context) ? 15 : 25),
+      style: TextStyle(
+          color: Color(0x1ff50555C), fontSize: isMobile(context) ? 15 : 25),
     );
   }
 
   Text textObjective() {
     return Text(
       profileInfo.objective,
-      style: TextStyle(color: Color(0x1ff50555C), fontSize: isMobile(context) ? 15 : 25),
+      style: TextStyle(
+          color: Color(0x1ff50555C), fontSize: isMobile(context) ? 15 : 25),
     );
   }
 

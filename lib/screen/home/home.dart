@@ -24,6 +24,18 @@ class _HomeState extends State<Home> {
     );
   }
 
+  bool isMobile(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
+    bool isMobile;
+    if (w < 600) {
+      isMobile = true;
+    } else {
+      isMobile = false;
+    }
+    return isMobile;
+  }
+
   Widget buildDeskTop() {
     return FutureBuilder(
       future: storage.ready,
@@ -36,8 +48,19 @@ class _HomeState extends State<Home> {
         return Container(
           child: ListView(
             children: [
-              NavigatorCustom(),
-              HomePageV2(),
+              isMobile(context)
+                  ? Column(
+                      children: [
+                        HomePageV2(),
+                        NavigatorCustom(),
+                      ],
+                    )
+                  : Column(
+                      children: [
+                        NavigatorCustom(),
+                        HomePageV2(),
+                      ],
+                    ),
             ],
           ),
         );

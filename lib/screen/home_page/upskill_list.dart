@@ -64,7 +64,7 @@ class _UpskillListState extends State<UpskillList> {
                       Text(
                         e.text,
                         style: TextStyle(
-                          fontSize: isMobile ? 15 : 15,
+                          fontSize: isMobile ? 15 : 17,
                         ),
                       ),
                     ],

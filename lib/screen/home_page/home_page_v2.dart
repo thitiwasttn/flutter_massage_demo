@@ -26,46 +26,40 @@ class _HomePageV2State extends State<HomePageV2> {
     return Color(int.parse(buffer.toString(), radix: 16));
   }
 
+  bool isMobile(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
+    bool isMobile;
+    if (w < 600) {
+      isMobile = true;
+    } else {
+      isMobile = false;
+    }
+    return isMobile;
+  }
+
   temp() {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
 
     if (w < 600) {
-      // print('mobile');
       h = 200;
     } else {
       h = MediaQuery.of(context).size.height * 0.5;
-      // print('desktop');
     }
-    // print('h >>> ${h}');
     return Container(
       color: Colors.grey.shade200,
-      // width: MediaQuery.of(context).size.width,
-      // padding: EdgeInsets.all(5),
-      // margin: const EdgeInsets.only(left: 20.0, right: 20.0),
       child: Column(
         children: [
-          // SizedBox(height: 30),
           Row(
             children: [
               Container(
-                // color: fromHex('#1F5F3C'),
-                /*decoration: BoxDecoration(
-                  // color: Colors.yellow,
-                  border: Border.all(color: Colors.black, width: 3),
-                  borderRadius: BorderRadius.all(Radius.circular(18)),
-                ),*/
                 width: MediaQuery.of(context).size.width * 1,
                 child: Container(
-                  // width: MediaQuery.of(context).size.width * 0.6,
                   padding: const EdgeInsets.all(10),
                   child: Center(
                     child: Container(
-                      // color: fromHex('#1F5F3C'),
-                      // padding: EdgeInsets.all(50),
                       decoration: BoxDecoration(
-                        // color: fromHex('#1F5F3C'),
-                        // border: Border.all(color: Colors.black, width: 3),
                         borderRadius: BorderRadius.all(Radius.circular(18)),
                       ),
                       height: h,
@@ -80,7 +74,6 @@ class _HomePageV2State extends State<HomePageV2> {
           Row(
             children: [
               Container(
-                // color: fromHex("F8F8F8"),
                 width: MediaQuery.of(context).size.width * 1,
                 child: Container(
                   padding: const EdgeInsets.all(10),

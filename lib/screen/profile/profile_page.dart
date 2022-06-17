@@ -75,7 +75,7 @@ class _ProfilePageState extends State<ProfilePage> {
           return Container(
             child: ListView(
               children: [
-                NavigatorCustom(),
+                isMobile(context) ? Container(): NavigatorCustom(),
                 SizedBox(
                   height: 10,
                 ),
@@ -594,6 +594,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 SizedBox(
                   height: 20,
                 ),
+                isMobile(context) ? NavigatorCustom() : Container(),
               ],
             ),
           );
