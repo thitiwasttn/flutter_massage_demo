@@ -11,7 +11,11 @@ class HomePageV2 extends StatefulWidget {
   const HomePageV2({Key? key}) : super(key: key);
 
   static Route<dynamic> route(bool animated) {
-    return SimpleRoute(name: '/', title: 'Home', builder: (_) => HomePageV2(), animated: animated);
+    return SimpleRoute(
+        name: '/',
+        title: 'Home',
+        builder: (_) => HomePageV2(),
+        animated: animated);
   }
 
   @override
@@ -51,7 +55,47 @@ class _HomePageV2State extends State<HomePageV2> {
       color: Colors.grey.shade200,
       child: Column(
         children: [
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
+          Container(
+            padding: EdgeInsets.all(20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Image.asset(
+                      'images/logo 1.png',
+                      fit: BoxFit.fitHeight,
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Container(
+                      child: Text(
+                        'WatPoMassage',
+                        style: TextStyle(
+                          color: Color(
+                            0xff1F5F3C,
+                          ),
+                          fontWeight: FontWeight.bold,
+                          fontSize: isMobile(context) ? 15 : 20,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Image.asset(
+                  'images/Bell_pin.png',
+                  fit: BoxFit.fitHeight,
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
           Row(
             children: [
               Container(
