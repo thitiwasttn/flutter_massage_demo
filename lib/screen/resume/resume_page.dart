@@ -76,71 +76,81 @@ class _ResumePageState extends State<ResumePage> {
             return Container();
           }
 
-          return Container(
-            child: ListView(
-              children: [
-                isMobile(context) ? Container() : NavigatorCustom(),
-                Container(
-                  margin: isMobile(context)
-                      ? EdgeInsets.only(left: 10, right: 10)
-                      : EdgeInsets.only(left: 50, right: 50),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
+          return Column(
+            children: [
+              Container(
+                height: isMobile(context)
+                    ? MediaQuery.of(context).size.height - 100
+                    : MediaQuery.of(context).size.height,
+                child: ListView(
+                  children: [
+                    isMobile(context) ? Container() : NavigatorCustom(),
+                    Container(
+                      margin: isMobile(context)
+                          ? EdgeInsets.only(left: 10, right: 10)
+                          : EdgeInsets.only(left: 50, right: 50),
+                      child: Column(
                         children: [
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            children: [
+                              Container(
+                                child: TextButton(
+                                  style: ButtonStyle(
+                                    overlayColor: MaterialStateProperty.all(
+                                        Colors.transparent),
+                                  ),
+                                  onPressed: () {
+                                    Routemaster.of(context).pop();
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Image.asset('images/Back.png'),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        'Back',
+                                        style: TextStyle(
+                                            color: Color(0x1ff1F5F3C),
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
                           Container(
-                            child: TextButton(
-                              style: ButtonStyle(
-                                overlayColor: MaterialStateProperty.all(
-                                    Colors.transparent),
-                              ),
-                              onPressed: () {
-                                Routemaster.of(context).pop();
-                              },
-                              child: Row(
-                                children: [
-                                  Image.asset('images/Back.png'),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    'Back',
-                                    style: TextStyle(
-                                        color: Color(0x1ff1F5F3C),
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
+                            padding: EdgeInsets.only(
+                              top: 30,
+                              bottom: 30,
+                              left: 5,
+                              right: 5,
                             ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [],
+                              color: Colors.white,
+                            ),
+                            child: getInfo(context),
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(
-                          top: 30,
-                          bottom: 30,
-                          left: 5,
-                          right: 5,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: [],
-                          color: Colors.white,
-                        ),
-                        child: getInfo(context),
-                      ),
-                    ],
-                  ),
+                    ),
+                    // isMobile(context) ? NavigatorCustom() : Container(),
+                  ],
                 ),
-                isMobile(context) ? NavigatorCustom() : Container(),
-              ],
-            ),
+              ),
+              Container(
+                child: isMobile(context) ? NavigatorCustom() : Container(),
+              ),
+            ],
           );
 
           // return Container();

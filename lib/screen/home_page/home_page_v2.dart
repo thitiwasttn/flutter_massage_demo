@@ -51,12 +51,13 @@ class _HomePageV2State extends State<HomePageV2> {
       color: Colors.grey.shade200,
       child: Column(
         children: [
+          SizedBox(height: 10,),
           Row(
             children: [
               Container(
                 width: MediaQuery.of(context).size.width * 1,
                 child: Container(
-                  padding: const EdgeInsets.all(10),
+                  // padding: const EdgeInsets.all(10),
                   child: Center(
                     child: Container(
                       decoration: BoxDecoration(
@@ -70,7 +71,7 @@ class _HomePageV2State extends State<HomePageV2> {
               ),
             ],
           ),
-          SizedBox(height: 30),
+          SizedBox(height: 10),
           Row(
             children: [
               Container(
@@ -91,7 +92,7 @@ class _HomePageV2State extends State<HomePageV2> {
               ),
             ],
           ),
-          SizedBox(height: 30),
+          SizedBox(height: 10),
           Row(
             children: [
               Container(

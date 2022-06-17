@@ -73,8 +73,8 @@ class _CarouselV2State extends State<CarouselV2> {
             return GestureDetector(
               onTap: () => _controller.animateToPage(entry.key),
               child: Container(
-                width: 12.0,
-                height: 12.0,
+                width: 5.0,
+                height: 5.0,
                 margin: EdgeInsets.symmetric(
                   vertical: 8.0,
                   horizontal: 4.0,

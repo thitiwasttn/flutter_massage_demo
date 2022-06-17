@@ -35,280 +35,303 @@ class _JobDetailState extends State<JobDetail> {
   Job job = Job();
   late int pageState = 1;
 
+  bool isMobile(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
+    bool isMobile;
+    if (w < 600) {
+      isMobile = true;
+    } else {
+      isMobile = false;
+    }
+    return isMobile;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: ListView(
-          children: [
-            NavigatorCustom(),
-            Column(
+      body: Column(
+        children: [
+          Container(
+            height: isMobile(context)
+                ? MediaQuery.of(context).size.height - 100
+                : MediaQuery.of(context).size.height,
+            child: ListView(
               children: [
-                Row(
+                isMobile(context) ? Container() : NavigatorCustom(),
+                Column(
                   children: [
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      child: TextButton(
-                        /*style: ButtonStyle(
-                          foregroundColor:
-                              MaterialStateProperty.all<Color>(Colors.blue),
-                        ),*/
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Row(
-                          children: [
-                            Image.asset('images/Back.png'),
-                            SizedBox(
-                              width: 10,
+                    Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: TextButton(
+                            /*style: ButtonStyle(
+                              foregroundColor:
+                                  MaterialStateProperty.all<Color>(Colors.blue),
+                            ),*/
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Row(
+                              children: [
+                                Image.asset('images/Back.png'),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text('Back'),
+                              ],
                             ),
-                            Text('Back'),
-                          ],
-                        ),
+                          ),
+                        )
+                      ],
+                    ),
+                    Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                              width: 300.0,
+                              height: 300.0,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: new DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: NetworkImage(job.imageUrl)))),
+                        ],
                       ),
-                    )
+                      // color: Colors.green,
+                    ),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Container(
+                      // color: Colors.green,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            job.name,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            child: Image.asset(
+                              'images/saved.png',
+                              fit: BoxFit.fitHeight,
+                              height: 30,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            child: Image.asset(
+                              'images/location.png',
+                              fit: BoxFit.fitHeight,
+                              height: 30,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            job.subName,
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      // color: Colors.grey,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.white,
+                              boxShadow: [],
+                            ),
+                            padding: EdgeInsets.all(10),
+                            child: Text(
+                              job.time,
+                              style: TextStyle(
+                                color: Colors.blue,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.white,
+                              boxShadow: [],
+                            ),
+                            padding: EdgeInsets.all(10),
+                            child: Text(
+                              "Onsite",
+                              style: TextStyle(
+                                color: Colors.blue,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.white,
+                              boxShadow: [],
+                            ),
+                            padding: EdgeInsets.all(10),
+                            child: Text(
+                              '\$${job.price} / Mounth',
+                              style: TextStyle(
+                                color: Colors.blue,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(left: 50, right: 50),
+                      // color: Colors.grey,
+                      child: Row(
+                        children: [
+                          TextButton(
+                            style: ButtonStyle(
+                              overlayColor:
+                                  MaterialStateProperty.all(Colors.transparent),
+                            ),
+                            /*style: ButtonStyle(
+                              foregroundColor:
+                                  MaterialStateProperty.all<Color>(Colors.blue),
+                            ),*/
+                            onPressed: () {
+                              setState(() {
+                                pageState = 1;
+                              });
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(15),
+                              decoration: getBoxDesc(),
+                              child: Text(
+                                'Descripion',
+                                style: getTextStyle(),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          TextButton(
+                            style: ButtonStyle(
+                              overlayColor:
+                                  MaterialStateProperty.all(Colors.transparent),
+                            ),
+                            /*style: ButtonStyle(
+                              foregroundColor:
+                                  MaterialStateProperty.all<Color>(Colors.blue),
+                            ),*/
+                            onPressed: () {
+                              setState(() {
+                                pageState = 2;
+                              });
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(15),
+                              decoration: getBoxCompany(),
+                              child: Text(
+                                'Company',
+                                style: getTextStyleCompany(),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
+                SizedBox(
+                  height: 10,
+                ),
                 Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                          width: 300.0,
-                          height: 300.0,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: new DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: NetworkImage(job.imageUrl)))),
-                    ],
-                  ),
-                  // color: Colors.green,
+                  // color: Colors.white,
+                  child: getMessage(),
                 ),
                 SizedBox(
                   height: 50,
                 ),
                 Container(
-                  // color: Colors.green,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        job.name,
+                  child: TextButton(
+                    style: ButtonStyle(
+                      overlayColor:
+                          MaterialStateProperty.all(Colors.transparent),
+                    ),
+                    /*style: ButtonStyle(
+                              foregroundColor:
+                                  MaterialStateProperty.all<Color>(Colors.blue),
+                            ),*/
+                    onPressed: () {},
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: 400,
+                      padding: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Color(0xff1F5F3C),
+                        boxShadow: [],
+                      ),
+                      child: Text(
+                        'Apply Now',
                         style: TextStyle(
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        child: Image.asset(
-                          'images/saved.png',
-                          fit: BoxFit.fitHeight,
-                          height: 30,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        child: Image.asset(
-                          'images/location.png',
-                          fit: BoxFit.fitHeight,
-                          height: 30,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        job.subName,
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  // color: Colors.grey,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
                           color: Colors.white,
-                          boxShadow: [],
-                        ),
-                        padding: EdgeInsets.all(10),
-                        child: Text(
-                          job.time,
-                          style: TextStyle(
-                            color: Colors.blue,
-                          ),
                         ),
                       ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: Colors.white,
-                          boxShadow: [],
-                        ),
-                        padding: EdgeInsets.all(10),
-                        child: Text(
-                          "Onsite",
-                          style: TextStyle(
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: Colors.white,
-                          boxShadow: [],
-                        ),
-                        padding: EdgeInsets.all(10),
-                        child: Text(
-                          '\$${job.price} / Mounth',
-                          style: TextStyle(
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Container(
-                  padding: EdgeInsets.only(left: 50, right: 50),
-                  // color: Colors.grey,
-                  child: Row(
-                    children: [
-                      TextButton(
-                        style: ButtonStyle(
-                          overlayColor:
-                              MaterialStateProperty.all(Colors.transparent),
-                        ),
-                        /*style: ButtonStyle(
-                          foregroundColor:
-                              MaterialStateProperty.all<Color>(Colors.blue),
-                        ),*/
-                        onPressed: () {
-                          setState(() {
-                            pageState = 1;
-                          });
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(15),
-                          decoration: getBoxDesc(),
-                          child: Text(
-                            'Descripion',
-                            style: getTextStyle(),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      TextButton(
-                        style: ButtonStyle(
-                          overlayColor:
-                              MaterialStateProperty.all(Colors.transparent),
-                        ),
-                        /*style: ButtonStyle(
-                          foregroundColor:
-                              MaterialStateProperty.all<Color>(Colors.blue),
-                        ),*/
-                        onPressed: () {
-                          setState(() {
-                            pageState = 2;
-                          });
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(15),
-                          decoration: getBoxCompany(),
-                          child: Text(
-                            'Company',
-                            style: getTextStyleCompany(),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              // color: Colors.white,
-              child: getMessage(),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            Container(
-              child: TextButton(
-                style: ButtonStyle(
-                  overlayColor: MaterialStateProperty.all(Colors.transparent),
-                ),
-                /*style: ButtonStyle(
-                          foregroundColor:
-                              MaterialStateProperty.all<Color>(Colors.blue),
-                        ),*/
-                onPressed: () {},
-                child: Container(
-                  alignment: Alignment.center,
-                  width: 400,
-                  padding: EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Color(0xff1F5F3C),
-                    boxShadow: [],
-                  ),
-                  child: Text(
-                    'Apply Now',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
                     ),
                   ),
                 ),
-              ),
+                SizedBox(
+                  height: 50,
+                )
+              ],
             ),
-            SizedBox(
-              height: 50,
-            )
-          ],
-        ),
+          ),
+          Container(
+            child: isMobile(context) ? NavigatorCustom() : Container(),
+          )
+        ],
       ),
     );
   }

@@ -45,24 +45,23 @@ class _HomeState extends State<Home> {
             child: CircularProgressIndicator(),
           );
         }
-        return Container(
-          child: ListView(
-            children: [
-              isMobile(context)
-                  ? Column(
-                      children: [
-                        HomePageV2(),
-                        NavigatorCustom(),
-                      ],
-                    )
-                  : Column(
-                      children: [
-                        NavigatorCustom(),
-                        HomePageV2(),
-                      ],
-                    ),
-            ],
-          ),
+        return Column(
+          children: [
+            Container(
+              height: isMobile(context)
+                  ? MediaQuery.of(context).size.height - 100
+                  : MediaQuery.of(context).size.height,
+              child: ListView(
+                children: [
+                  isMobile(context) ? Container() : NavigatorCustom(),
+                  HomePageV2(),
+                ],
+              ),
+            ),
+            Container(
+              child: isMobile(context) ? NavigatorCustom() : Container(),
+            ),
+          ],
         );
       },
     );
