@@ -52,6 +52,8 @@ class _JobListState extends State<JobList> {
                         ),
                         child: Image.network(
                           e.imageUrl,
+                          fit: BoxFit.cover,
+                          height: 200,
                         ),
                       ),
                       Row(

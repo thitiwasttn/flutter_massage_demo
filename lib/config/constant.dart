@@ -1,5 +1,8 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class Constant {
-  static const String backendUrl = 'http://localhost:1337';
+  static String backendUrl = '${dotenv.env['BACKEND_URL']}';
+
 
 
 }

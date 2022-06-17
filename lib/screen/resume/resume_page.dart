@@ -85,7 +85,7 @@ class _ResumePageState extends State<ResumePage> {
                               },
                               child: Row(
                                 children: [
-                                  Image.asset('images/back.png'),
+                                  Image.asset('images/Back.png'),
                                   SizedBox(
                                     width: 10,
                                   ),

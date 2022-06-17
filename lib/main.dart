@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_massage/config/constant.dart';
 import 'package:flutter_massage/model/profile_info.dart';
 import 'package:flutter_massage/routers.dart';
 import 'package:flutter_massage/screen/home/home.dart';
@@ -13,10 +14,14 @@ import 'package:flutter_massage/screen/resume/resume_page.dart';
 import 'package:flutter_massage/utils/my_provider.dart';
 import 'package:flutter_massage/utils/shared_object.dart';
 import 'package:routemaster/routemaster.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 
 import 'navigator_route.dart';
 
-void main() {
+Future<void> main() async {
+  await dotenv.load(fileName: ".env");
+  print('backend url ${Constant.backendUrl}');
   runApp(const MyApp());
 }
 

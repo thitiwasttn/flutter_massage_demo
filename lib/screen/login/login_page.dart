@@ -107,6 +107,20 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  void _show(BuildContext ctx) {
+    showDialog(
+        context: ctx,
+        builder: (_) => AlertDialog(
+          title: const Text('Invalid'),
+          content: const Text('username or password'),
+          actions: [
+            TextButton(
+                onPressed: () => Navigator.of(ctx).pop(),
+                child: const Text('Close '))
+          ],
+        ));
+  }
+
   Future<void> login(BuildContext context) async {
     print('username $username, password $password');
     Profile p = Profile();
@@ -116,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
     print('name ${p.name}');
     print('token ${p.token}');
     print('id ${p.id}');
-    if (p.token != null) {
+    if (p.token != '') {
       sharedObject.profile.id = p.id;
       sharedObject.profile.name = p.name;
       sharedObject.profile.imageUrl = p.imageUrl;
@@ -128,6 +142,8 @@ class _LoginPageState extends State<LoginPage> {
       storage.setItem("id", p.id);
       storage.setItem("imageUrl", p.imageUrl);
       Routemaster.of(context).push('/profile');
+    } else {
+      _show(context);
     }
   }
 }

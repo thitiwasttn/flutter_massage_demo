@@ -58,7 +58,7 @@ class _JobDetailState extends State<JobDetail> {
                         },
                         child: Row(
                           children: [
-                            Image.asset('images/back.png'),
+                            Image.asset('images/Back.png'),
                             SizedBox(
                               width: 10,
                             ),

@@ -6,7 +6,6 @@ import '../utils/my_provider.dart';
 import '../utils/shared_object.dart';
 
 class NavigatorCustom extends StatefulWidget {
-
   const NavigatorCustom({Key? key}) : super(key: key);
 
   @override
@@ -14,10 +13,8 @@ class NavigatorCustom extends StatefulWidget {
 }
 
 class _NavigatorCustomState extends State<NavigatorCustom> {
-
   final LocalStorage storage = LocalStorage('some_key');
-  
-  
+
   @override
   Widget build(BuildContext context) {
     SharedObject sharedObject = MyProvider.of(context);
@@ -40,7 +37,13 @@ class _NavigatorCustomState extends State<NavigatorCustom> {
                 children: [
                   SizedBox(height: 20),
                   Image.asset('images/Home_duotone.png'),
-                  Text("หน้าแรก"),
+                  Text(
+                    "หน้าแรก",
+                    style: TextStyle(
+                      color: Color(0xff8E8E93),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -59,7 +62,13 @@ class _NavigatorCustomState extends State<NavigatorCustom> {
                 children: [
                   SizedBox(height: 20),
                   Image.asset('images/Search_alt_duotone_line.png'),
-                  Text("ค้นหา"),
+                  Text(
+                    "ค้นหา",
+                    style: TextStyle(
+                      color: Color(0xff8E8E93),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -78,7 +87,13 @@ class _NavigatorCustomState extends State<NavigatorCustom> {
                 children: [
                   SizedBox(height: 20),
                   Image.asset('images/Box.png'),
-                  Text("แฟ้มงาน"),
+                  Text(
+                    "แฟ้มงาน",
+                    style: TextStyle(
+                      color:Color(0xff8E8E93),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -90,8 +105,10 @@ class _NavigatorCustomState extends State<NavigatorCustom> {
                 overlayColor: MaterialStateProperty.all(Colors.transparent),
               ),
               onPressed: () {
-                print('storage.getItem("isLogin") == Null ${storage.getItem("isLogin") == null}');
-                if (storage.getItem("isLogin") == null || !storage.getItem("isLogin")) {
+                print(
+                    'storage.getItem("isLogin") == Null ${storage.getItem("isLogin") == null}');
+                if (storage.getItem("isLogin") == null ||
+                    !storage.getItem("isLogin")) {
                   Routemaster.of(context).push('/login');
                 } else {
                   Routemaster.of(context).push('/profile');
@@ -101,7 +118,13 @@ class _NavigatorCustomState extends State<NavigatorCustom> {
                 children: [
                   SizedBox(height: 20),
                   Image.asset('images/User.png'),
-                  Text("ข้อมูลส่วนตัว"),
+                  Text(
+                    "ข้อมูลส่วนตัว",
+                    style: TextStyle(
+                      color: Color(0xff8E8E93),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ],
               ),
             ),
