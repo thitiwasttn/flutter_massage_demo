@@ -17,67 +17,84 @@ class _UpskillListState extends State<UpskillList> {
     upskill.add(Upskill("images/kids.png", "นวดทารกและเด็ก"));
     upskill.add(Upskill("images/women.png", "นวดดูแลสุขภาพผู้หญิง"));
     upskill.add(Upskill("images/stuff.png", "นวดประคบอบสมุนไพร"));
-    upskill.add(Upskill("images/kids.png", "นวด นวด นวดดดดดดดดดดดดดดดดดดดดดดดดดดด"));
+    upskill.add(
+        Upskill("images/kids.png", "นวด นวด นวดดดดดดดดดดดดดดดดดดดดดดดดดดด"));
   }
 
   getList() {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
+    bool isMobile;
+    if (w < 600) {
+      // print('mobile');
+      isMobile = true;
+      // h = 200;
+    } else {
+      isMobile = false;
+      // h = MediaQuery.of(context).size.height * 0.5;
+      // print('desktop');
+    }
     return upskill
         .map(
           (e) => Container(
-              padding: EdgeInsets.only(left: 14, right: 14),
-              width: 300,
-              // color: Colors.red,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+            padding: EdgeInsets.only(left: 14, right: 14),
+            width: isMobile ? 200 : 300,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      child: Image.asset(
+                        e.imageUrl,
+                        fit: BoxFit.fitHeight,
+                        height: isMobile ? 100 : 130,
+                        // color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Container(
-                        child: Image.asset(
-                          e.imageUrl,
-                          fit: BoxFit.fitHeight,
-                          height: 130,
-                          // color: Colors.grey,
+                      Text(
+                        e.text,
+                        style: TextStyle(
+                          fontSize: isMobile ? 15 : 15,
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Row(
-                    // mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 270,
-                        // color: Colors.grey,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Flexible(
-                              child: Text(
-                                e.text,
-                                style: TextStyle(
-                                  fontSize: 24,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              )),
+                )
+              ],
+            ),
+          ),
         )
         .toList();
   }
 
   @override
   Widget build(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
+    bool isMobile;
+    if (w < 600) {
+      // print('mobile');
+      isMobile = true;
+      // h = 200;
+    } else {
+      isMobile = false;
+      // h = MediaQuery.of(context).size.height * 0.5;
+      // print('desktop');
+    }
     return Container(
       padding: EdgeInsets.all(20),
       child: Column(
@@ -107,7 +124,7 @@ class _UpskillListState extends State<UpskillList> {
           ),
           Container(
             margin: EdgeInsets.symmetric(vertical: 20.0),
-            height: 350,
+            height: isMobile ? 250 : 350,
             child: ListView(
               // This next line does the trick.
               scrollDirection: Axis.horizontal,

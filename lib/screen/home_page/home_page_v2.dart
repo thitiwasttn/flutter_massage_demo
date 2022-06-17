@@ -27,6 +27,17 @@ class _HomePageV2State extends State<HomePageV2> {
   }
 
   temp() {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
+
+    if (w < 600) {
+      // print('mobile');
+      h = 200;
+    } else {
+      h = MediaQuery.of(context).size.height * 0.5;
+      // print('desktop');
+    }
+    // print('h >>> ${h}');
     return Container(
       color: Colors.grey.shade200,
       // width: MediaQuery.of(context).size.width,
@@ -34,7 +45,7 @@ class _HomePageV2State extends State<HomePageV2> {
       // margin: const EdgeInsets.only(left: 20.0, right: 20.0),
       child: Column(
         children: [
-          SizedBox(height: 30),
+          // SizedBox(height: 30),
           Row(
             children: [
               Container(
@@ -57,7 +68,7 @@ class _HomePageV2State extends State<HomePageV2> {
                         // border: Border.all(color: Colors.black, width: 3),
                         borderRadius: BorderRadius.all(Radius.circular(18)),
                       ),
-                      // height: 300,
+                      height: h,
                       child: CarouselV2(),
                     ),
                   ),

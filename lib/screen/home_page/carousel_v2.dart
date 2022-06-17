@@ -30,9 +30,9 @@ class _CarouselV2State extends State<CarouselV2> {
 
   @override
   Widget build(BuildContext context) {
-    final double height = MediaQuery.of(context).size.height;
+
     return Container(
-      height: MediaQuery.of(context).size.height * .6,
+      // color: Colors.red,
       child: Column(children: [
         Expanded(
           child: CarouselSlider(
