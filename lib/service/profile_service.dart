@@ -88,6 +88,7 @@ class ProfileService {
       ret.education = value['attributes']['education'];
       ret.experience = value['attributes']['experience'];
       ret.skill = value['attributes']['skill'];
+      ret.objective = value['attributes']['objective'];
       ret.certifications = [];
       List<dynamic> temp = value['attributes']['certification']['data'];
       for (var value1 in temp) {

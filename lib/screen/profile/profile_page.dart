@@ -45,6 +45,18 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
+  bool isMobile(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
+    bool isMobile;
+    if (w < 600) {
+      isMobile = true;
+    } else {
+      isMobile = false;
+    }
+    return isMobile;
+  }
+
   @override
   Widget build(BuildContext context) {
     SharedObject sharedObject = MyProvider.of(context);
@@ -68,7 +80,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: 10,
                 ),
                 Container(
-                  padding: EdgeInsets.only(left: 50, right: 50),
+                  padding: isMobile(context) ? EdgeInsets.only(left: 10, right: 10) : EdgeInsets.only(left: 50, right: 50),
                   // color: Colors.grey,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -125,7 +137,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: 30,
                 ),
                 Container(
-                  margin: EdgeInsets.only(
+                  margin: isMobile(context) ? EdgeInsets.only(
+                    left: 10,
+                    right: 10,
+                  ) : EdgeInsets.only(
                     left: 50,
                     right: 50,
                   ),
@@ -171,7 +186,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: 10,
                 ),
                 Container(
-                  margin: EdgeInsets.only(
+                  margin: isMobile(context) ? EdgeInsets.only(
+                    left: 10,
+                    right: 10,
+                  ) : EdgeInsets.only(
                     left: 50,
                     right: 50,
                   ),
@@ -217,7 +235,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: 10,
                 ),
                 Container(
-                  margin: EdgeInsets.only(
+                  margin: isMobile(context) ? EdgeInsets.only(
+                    left: 10,
+                    right: 10,
+                  ) : EdgeInsets.only(
                     left: 50,
                     right: 50,
                   ),
@@ -263,7 +284,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: 10,
                 ),
                 Container(
-                  margin: EdgeInsets.only(
+                  margin: isMobile(context) ? EdgeInsets.only(
+                    left: 10,
+                    right: 10,
+                  ) : EdgeInsets.only(
                     left: 50,
                     right: 50,
                   ),
@@ -309,7 +333,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: 10,
                 ),
                 Container(
-                  margin: EdgeInsets.only(
+                  margin: isMobile(context) ? EdgeInsets.only(
+                    left: 10,
+                    right: 10,
+                  ) : EdgeInsets.only(
                     left: 50,
                     right: 50,
                   ),
@@ -355,7 +382,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: 10,
                 ),
                 Container(
-                  margin: EdgeInsets.only(
+                  margin: isMobile(context) ? EdgeInsets.only(
+                    left: 10,
+                    right: 10,
+                  ) : EdgeInsets.only(
                     left: 50,
                     right: 50,
                   ),
@@ -401,7 +431,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: 10,
                 ),
                 Container(
-                  margin: EdgeInsets.only(
+                  margin: isMobile(context) ? EdgeInsets.only(
+                    left: 10,
+                    right: 10,
+                  ) : EdgeInsets.only(
                     left: 50,
                     right: 50,
                   ),
@@ -447,7 +480,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: 20,
                 ),
                 Container(
-                  margin: EdgeInsets.only(
+                  margin: isMobile(context) ? EdgeInsets.only(
+                    left: 10,
+                    right: 10,
+                  ) : EdgeInsets.only(
                     left: 50,
                     right: 50,
                   ),
@@ -500,13 +536,16 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: 20,
                 ),
                 Container(
-                  margin: EdgeInsets.only(
+                  margin: isMobile(context) ? EdgeInsets.only(
+                    left: 10,
+                    right: 10,
+                  ) : EdgeInsets.only(
                     left: 50,
                     right: 50,
                   ),
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TextButton(
                         style: ButtonStyle(
@@ -535,11 +574,11 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             child: Row(
                               children: [
-                                Image.asset(
+                                /*Image.asset(
                                   'images/View_alt.png',
                                   width: 30,
                                   height: 30,
-                                ),
+                                ),*/
                                 Text(
                                   'logout'.toUpperCase(),
                                   style: TextStyle(

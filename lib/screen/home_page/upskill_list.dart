@@ -26,13 +26,9 @@ class _UpskillListState extends State<UpskillList> {
     double h = MediaQuery.of(context).size.height;
     bool isMobile;
     if (w < 600) {
-      // print('mobile');
       isMobile = true;
-      // h = 200;
     } else {
       isMobile = false;
-      // h = MediaQuery.of(context).size.height * 0.5;
-      // print('desktop');
     }
     return upskill
         .map(

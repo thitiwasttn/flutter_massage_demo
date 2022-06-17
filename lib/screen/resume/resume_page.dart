@@ -35,7 +35,10 @@ class _ResumePageState extends State<ResumePage> {
     if (isready) {
       print("ok");
       if (storage.getItem("isLogin") != null && storage.getItem("isLogin")) {
-        ProfileInfo temp = await profileService.getProfileInfoByToken(storage.getItem("id"), storage.getItem("token")).then((value) {
+        ProfileInfo temp = await profileService
+            .getProfileInfoByToken(
+                storage.getItem("id"), storage.getItem("token"))
+            .then((value) {
           return value;
         });
         print('temp ${temp.image}');
@@ -49,6 +52,18 @@ class _ResumePageState extends State<ResumePage> {
         Routemaster.of(context).push('/login');
       }
     }
+  }
+
+  bool isMobile(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
+    bool isMobile;
+    if (w < 600) {
+      isMobile = true;
+    } else {
+      isMobile = false;
+    }
+    return isMobile;
   }
 
   @override
@@ -66,7 +81,9 @@ class _ResumePageState extends State<ResumePage> {
               children: [
                 NavigatorCustom(),
                 Container(
-                  margin: EdgeInsets.only(left: 50, right: 50),
+                  margin: isMobile(context)
+                      ? EdgeInsets.only(left: 10, right: 10)
+                      : EdgeInsets.only(left: 50, right: 50),
                   child: Column(
                     children: [
                       SizedBox(
@@ -77,8 +94,8 @@ class _ResumePageState extends State<ResumePage> {
                           Container(
                             child: TextButton(
                               style: ButtonStyle(
-                                overlayColor:
-                                MaterialStateProperty.all(Colors.transparent),
+                                overlayColor: MaterialStateProperty.all(
+                                    Colors.transparent),
                               ),
                               onPressed: () {
                                 Routemaster.of(context).pop();
@@ -89,7 +106,8 @@ class _ResumePageState extends State<ResumePage> {
                                   SizedBox(
                                     width: 10,
                                   ),
-                                  Text('Back',
+                                  Text(
+                                    'Back',
                                     style: TextStyle(
                                         color: Color(0x1ff1F5F3C),
                                         fontWeight: FontWeight.bold),
@@ -174,31 +192,31 @@ class _ResumePageState extends State<ResumePage> {
     );
   }
 
-  Text textEducation() {
+  Text textEducation(BuildContext context) {
     return Text(
       profileInfo.education,
-      style: const TextStyle(color: Color(0x1ff50555C), fontSize: 25),
+      style: TextStyle(color: Color(0x1ff50555C), fontSize: isMobile(context) ? 15 : 25),
     );
   }
 
-  Text textExperience() {
+  Text textExperience(BuildContext context) {
     return Text(
       profileInfo.experience,
-      style: const TextStyle(color: Color(0x1ff50555C), fontSize: 25),
+      style: TextStyle(color: Color(0x1ff50555C), fontSize: isMobile(context) ? 15 : 25),
     );
   }
 
   Text textSkill() {
     return Text(
       profileInfo.skill,
-      style: const TextStyle(color: Color(0x1ff50555C), fontSize: 25),
+      style: TextStyle(color: Color(0x1ff50555C), fontSize: isMobile(context) ? 15 : 25),
     );
   }
 
   Text textObjective() {
     return Text(
       profileInfo.objective,
-      style: const TextStyle(color: Color(0x1ff50555C), fontSize: 25),
+      style: TextStyle(color: Color(0x1ff50555C), fontSize: isMobile(context) ? 15 : 25),
     );
   }
 
@@ -216,12 +234,12 @@ class _ResumePageState extends State<ResumePage> {
                 children: [
                   Container(
                     margin: const EdgeInsets.only(left: 30),
-                    child: const Text(
+                    child: Text(
                       "การศึกษา",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Color(0x1ff50555C),
-                          fontSize: 25),
+                          fontSize: isMobile(context) ? 20 : 25),
                     ),
                   ),
                   const SizedBox(
@@ -234,7 +252,7 @@ class _ResumePageState extends State<ResumePage> {
           Container(
             width: MediaQuery.of(context).size.width * 0.8,
             margin: EdgeInsets.only(left: 60),
-            child: textEducation(),
+            child: textEducation(context),
           ),
         ],
       ),
@@ -255,12 +273,12 @@ class _ResumePageState extends State<ResumePage> {
                 children: [
                   Container(
                     margin: const EdgeInsets.only(left: 30),
-                    child: const Text(
+                    child: Text(
                       "ประสบการณ์",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Color(0x1ff50555C),
-                          fontSize: 25),
+                          fontSize: isMobile(context) ? 20 : 25),
                     ),
                   ),
                   const SizedBox(
@@ -273,7 +291,7 @@ class _ResumePageState extends State<ResumePage> {
           Container(
             width: MediaQuery.of(context).size.width * 0.8,
             margin: EdgeInsets.only(left: 60),
-            child: textExperience(),
+            child: textExperience(context),
           ),
         ],
       ),
@@ -294,12 +312,12 @@ class _ResumePageState extends State<ResumePage> {
                 children: [
                   Container(
                     margin: const EdgeInsets.only(left: 30),
-                    child: const Text(
+                    child: Text(
                       "ทักษะ",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Color(0x1ff50555C),
-                          fontSize: 25),
+                          fontSize: isMobile(context) ? 20 : 25),
                     ),
                   ),
                   const SizedBox(
@@ -331,12 +349,12 @@ class _ResumePageState extends State<ResumePage> {
                 children: [
                   Container(
                     margin: const EdgeInsets.only(left: 30),
-                    child: const Text(
+                    child: Text(
                       "ใบรับรอง",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Color(0x1ff50555C),
-                          fontSize: 25),
+                          fontSize: isMobile(context) ? 20 : 25),
                     ),
                   ),
                   const SizedBox(
@@ -382,12 +400,12 @@ class _ResumePageState extends State<ResumePage> {
                 children: [
                   Container(
                     margin: const EdgeInsets.only(left: 30),
-                    child: const Text(
+                    child: Text(
                       "งานที่สนใจ",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Color(0x1ff50555C),
-                          fontSize: 25),
+                          fontSize: isMobile(context) ? 20 : 25),
                     ),
                   ),
                   const SizedBox(

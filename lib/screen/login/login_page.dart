@@ -23,6 +23,18 @@ class _LoginPageState extends State<LoginPage> {
 
   final LocalStorage storage = LocalStorage('some_key');
 
+  bool isMobile(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
+    bool isMobile;
+    if (w < 600) {
+      isMobile = true;
+    } else {
+      isMobile = false;
+    }
+    return isMobile;
+  }
+
   @override
   Widget build(BuildContext context) {
     setState(() {
@@ -39,7 +51,9 @@ class _LoginPageState extends State<LoginPage> {
               height: MediaQuery.of(context).size.height,
               child: Center(
                 child: Container(
-                  width: MediaQuery.of(context).size.width * 0.5,
+                  width: isMobile(context)
+                      ? MediaQuery.of(context).size.width * 0.9
+                      : MediaQuery.of(context).size.width * 0.5,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -111,14 +125,14 @@ class _LoginPageState extends State<LoginPage> {
     showDialog(
         context: ctx,
         builder: (_) => AlertDialog(
-          title: const Text('Invalid'),
-          content: const Text('username or password'),
-          actions: [
-            TextButton(
-                onPressed: () => Navigator.of(ctx).pop(),
-                child: const Text('Close '))
-          ],
-        ));
+              title: const Text('Invalid'),
+              content: const Text('username or password'),
+              actions: [
+                TextButton(
+                    onPressed: () => Navigator.of(ctx).pop(),
+                    child: const Text('Close '))
+              ],
+            ));
   }
 
   Future<void> login(BuildContext context) async {
