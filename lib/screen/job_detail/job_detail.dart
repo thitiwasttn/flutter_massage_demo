@@ -59,12 +59,17 @@ class _JobDetailState extends State<JobDetail> {
             child: ListView(
               children: [
                 isMobile(context) ? Container() : NavigatorCustom(),
+                SizedBox(
+                  height: 10,
+                ),
                 Column(
                   children: [
                     Row(
                       children: [
                         Container(
-                          padding: EdgeInsets.all(10),
+                          padding: isMobile(context)
+                              ? EdgeInsets.all(0)
+                              : EdgeInsets.all(10),
                           child: TextButton(
                             /*style: ButtonStyle(
                               foregroundColor:
@@ -143,7 +148,7 @@ class _JobDetailState extends State<JobDetail> {
                             child: Image.asset(
                               'images/location.png',
                               fit: BoxFit.fitHeight,
-                              height: 30,
+                              height: 20,
                             ),
                           ),
                           SizedBox(
@@ -223,8 +228,9 @@ class _JobDetailState extends State<JobDetail> {
                       height: 30,
                     ),
                     Container(
-                      padding: EdgeInsets.only(left: 50, right: 50),
-                      // color: Colors.grey,
+                      padding: isMobile(context)
+                          ? EdgeInsets.only(left: 10, right: 10)
+                          : EdgeInsets.only(left: 50, right: 50),
                       child: Row(
                         children: [
                           TextButton(
@@ -242,7 +248,9 @@ class _JobDetailState extends State<JobDetail> {
                               });
                             },
                             child: Container(
-                              padding: EdgeInsets.all(15),
+                              padding: isMobile(context)
+                                  ? EdgeInsets.all(7)
+                                  : EdgeInsets.all(15),
                               decoration: getBoxDesc(),
                               child: Text(
                                 'Descripion',
@@ -268,7 +276,9 @@ class _JobDetailState extends State<JobDetail> {
                               });
                             },
                             child: Container(
-                              padding: EdgeInsets.all(15),
+                              padding: isMobile(context)
+                                  ? EdgeInsets.all(7)
+                                  : EdgeInsets.all(15),
                               decoration: getBoxCompany(),
                               child: Text(
                                 'Company',
@@ -304,7 +314,7 @@ class _JobDetailState extends State<JobDetail> {
                     onPressed: () {},
                     child: Container(
                       alignment: Alignment.center,
-                      width: 400,
+                      width: isMobile(context) ? MediaQuery.of(context).size.width * 0.9: 400,
                       padding: EdgeInsets.all(15),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
@@ -314,7 +324,7 @@ class _JobDetailState extends State<JobDetail> {
                       child: Text(
                         'Apply Now',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: isMobile(context) ? 15: 20,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
@@ -349,7 +359,9 @@ class _JobDetailState extends State<JobDetail> {
   Widget getMessage() {
     if (pageState == 1) {
       return Container(
-        padding: EdgeInsets.only(left: 50, right: 50),
+        padding: isMobile(context)
+            ? EdgeInsets.only(left: 20, right: 20)
+            : EdgeInsets.only(left: 50, right: 50),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -358,7 +370,7 @@ class _JobDetailState extends State<JobDetail> {
               "About This Job",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 20,
+                fontSize: isMobile(context) ? 15 : 20,
               ),
             ),
             SizedBox(
@@ -368,7 +380,7 @@ class _JobDetailState extends State<JobDetail> {
               job.detail,
               style: TextStyle(
                 color: Colors.grey,
-                fontSize: 20,
+                fontSize: isMobile(context) ? 15 : 20,
               ),
             ),
             SizedBox(
@@ -378,7 +390,7 @@ class _JobDetailState extends State<JobDetail> {
               "Job Responsibilities",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 20,
+                fontSize: isMobile(context) ? 15 : 20,
               ),
             ),
             SizedBox(
@@ -388,7 +400,7 @@ class _JobDetailState extends State<JobDetail> {
               job.jobResponsibilities,
               style: TextStyle(
                 color: Colors.grey,
-                fontSize: 20,
+                fontSize: isMobile(context) ? 15 : 20,
               ),
             ),
           ],
@@ -433,21 +445,29 @@ class _JobDetailState extends State<JobDetail> {
 
   TextStyle getTextStyle() {
     if (pageState == 1) {
-      return const TextStyle(
-          fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);
+      return TextStyle(
+          fontSize: isMobile(context) ? 15 : 20,
+          fontWeight: FontWeight.bold,
+          color: Colors.white);
     } else {
-      return const TextStyle(
-          fontSize: 20, fontWeight: FontWeight.bold, color: Colors.grey);
+      return TextStyle(
+          fontSize: isMobile(context) ? 15 : 20,
+          fontWeight: FontWeight.bold,
+          color: Colors.grey);
     }
   }
 
   TextStyle getTextStyleCompany() {
     if (pageState == 2) {
-      return const TextStyle(
-          fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);
+      return TextStyle(
+          fontSize: isMobile(context) ? 15 : 20,
+          fontWeight: FontWeight.bold,
+          color: Colors.white);
     } else {
-      return const TextStyle(
-          fontSize: 20, fontWeight: FontWeight.bold, color: Colors.grey);
+      return TextStyle(
+          fontSize: isMobile(context) ? 15 : 20,
+          fontWeight: FontWeight.bold,
+          color: Colors.grey);
     }
   }
 }
